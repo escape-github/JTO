@@ -1,6 +1,6 @@
 .header{
   top: 0;
-  width: 1440px;
+  width:100%;
   position: fixed;
   display: inline-flex;
   flex-direction: row;
@@ -47,31 +47,31 @@
 }
 
 .body{
-  padding:60px;
-  width:1000px;
+  padding:100px;
+  width:1120px;
   margin: 0 auto;
 }
 
-.profil{
+.profile{
   float:left;
-  width:290px;
-  height: 810px;
-  padding-right: 10px;
-  border: 2px dashed black;
+  width:328px;
+  height: 807px;
+  margin-right: 21px;
+  border: 1px dashed black;
 }
 
 .course{
   float:right;
-  width:690px;
+  width:761px;
 }
 
 .search{
-  height: 120px;
-  border: 2px dashed black;
-  margin-bottom: 10px;
+  height: 145px;
+  border: 1px dashed black;
+  margin-bottom: 19px;
 }
 
 .list{
-  height: 680px;
-  border: 2px dashed black;
+  height: 643px;
+  border: 1px dashed black;
 }

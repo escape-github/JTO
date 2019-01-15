@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from "./logo.svg";
 import './App.css';
+import Profile from './Profile.js'
+import prodo from './prodo.png'
 
 class App extends Component {
   render() {
@@ -18,8 +20,11 @@ class App extends Component {
         </nav>
       </div>
       <div class="body">
-        <div class="profil">
-          <h2>profil</h2>
+        <div class="profile">
+          <Profile name="권기훈"
+                   img={prodo}
+                   school="KAIST"
+                   major="전산학부"/>
         </div>
         <div class="course">
           <div class="search"><h2>search</h2></div>
