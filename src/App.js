@@ -1,36 +1,57 @@
 import React, { Component } from 'react';
-import logo from "./logo.svg";
-import './App.css';
+import { Menu, Grid, Segment } from 'semantic-ui-react'
+
 import Profile from './Profile.js'
+import SearchCourse from './SearchCourse.js'
+
+import logo from "./logo.svg";
 import prodo from './prodo.png'
+import './App.css';
 
 class App extends Component {
+
+  state = {}
+
   render() {
+
     return (
       <>
-      <div class="header">
-        <div class="Main-logo"><a href="localhost:3000"><img src={logo} alt=""></img></a></div>
-        <div class="Main-title">JTO:Jol업Tl뮬레Ol터</div>
-        <nav>
-          <ul class="navigator">
-            <li class="nav-item"><a href="localhost:3000">About</a></li>
-            <li class="nav-item"><a href="http://naver.com">Naver</a></li>
-            <li class="nav-item"><a href="http://google.com">Google</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="body">
-        <div class="profile">
-          <Profile name="권기훈"
-                   img={prodo}
-                   school="KAIST"
-                   major="전산학부"/>
-        </div>
-        <div class="course">
-          <div class="search"><h2>search</h2></div>
-          <div class="list"><h2>list</h2></div>
-        </div>
-      </div>
+      <Menu borderless size="massive">
+        <Menu.Item>
+          <img src={logo} alt=""/>  JTO:졸업시뮬레이터
+        </Menu.Item>
+        <Menu.Item name='about'>
+          About
+        </Menu.Item>
+        <Menu.Item name='google' href="http://www.google.com">
+          Go to Google
+        </Menu.Item>
+        <Menu.Item name='naver' href="http://www.naver.com">
+          Go to Naver
+        </Menu.Item>
+      </Menu>
+
+      <Grid centered container columns="equal">
+        <Grid.Row stretched>
+          <Grid.Column width={3}>
+              <Profile name="권기훈"
+                      img={prodo}
+                      school="KAIST"
+                      major="전산학부"/>
+          </Grid.Column>
+          <Grid.Column width={12}>
+            <Grid.Row>
+              <Segment>
+                <SearchCourse />
+              </Segment>
+            </Grid.Row>
+            <Grid.Row>
+              <Segment>
+              </Segment>
+            </Grid.Row>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
       </>
     );
   }
