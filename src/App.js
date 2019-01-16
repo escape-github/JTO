@@ -10,10 +10,18 @@ import './App.css';
 
 class App extends Component {
 
-  state = {}
+  state = {
+
+  }
+  myCallBack = (course) => {
+    this.setState({
+      course:course
+    })
+  }
 
   render() {
 
+    const {course} = this.state
     return (
       <>
       <Menu borderless size="massive">
@@ -42,7 +50,8 @@ class App extends Component {
           <Grid.Column width={12}>
             <Grid.Row>
               <Segment>
-                <SearchCourse />
+                <SearchCourse searched_course={this.myCallBack}/><br></br>
+                {course ? <div>[{course["과목코드"]}] {course["과목명"]} {course["과목구분"]}</div> : ""}
               </Segment>
             </Grid.Row>
             <Grid.Row>
