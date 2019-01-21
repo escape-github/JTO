@@ -10,6 +10,7 @@
 import React, { Component } from 'react';
 import { Grid, Menu } from 'semantic-ui-react';
 
+
 import Profile from "./Body.Profile";
 import Takens from "./Body.Takens";
 
@@ -19,6 +20,11 @@ import prodo from "../prodo.png";
     Body Component
     - returns a grid of components
 */
+
+const bodyStyle = {
+    minWidth: "1200px",   
+};
+
 export default class Body extends Component {
 
     state = {
@@ -33,7 +39,7 @@ export default class Body extends Component {
     render() {
         const {bodyBar} = this.state
         return(
-            <Grid centered container columns="equal">
+            <Grid centered container columns="equal" style={bodyStyle}>
                 <Grid.Column width={3}>
                     <Profile name="권기훈" img={prodo} school="KAIST" major="SoC" />
                 </Grid.Column>
