@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { Search } from 'semantic-ui-react'
-import course from './course.json'
+import course from '../course.json'
 
 const source = course
 

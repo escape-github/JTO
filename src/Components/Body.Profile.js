@@ -1,6 +1,5 @@
 import React from "react"
 import { Image, Card, Icon } from 'semantic-ui-react'
-import './Profile.css'
 
 function Profile({name, img, school, major}){
     return(
