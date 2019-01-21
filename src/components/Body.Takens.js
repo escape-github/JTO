@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
-import { Divider, Grid, Button, Container, Header, Label } from 'semantic-ui-react'
+import { Divider, Grid, Button, Container, Header, Label, Pagination } from 'semantic-ui-react'
 import SearchCourse from "./Body.SearchCourse";
 import Database from '../database/Database';
 
+const itemsPerPage = 7
+
 export default class Takens extends Component{
+    
     state = {
-        courses: []
+        courses: [],
+        page: 1,
     }
     
     componentDidMount(){
@@ -46,14 +50,21 @@ export default class Takens extends Component{
             </>
             )
         })
-    } 
+    }
+    
+    handlePageChange = (e, {activePage}) => {
+        this.setState({page:activePage})
+    }
 
     render() {
+        var {page, courses} = this.state
+        var totPages = Math.ceil(courses.length / itemsPerPage)
         return(
             <>
             <SearchCourse searched_course={course => this.setState({course})}/>
             <Divider />
-            {this.takenList(this.state.courses)}
+            {this.takenList(courses.slice((page-1)*itemsPerPage, Math.min(page*itemsPerPage, courses.length)))}
+            <Pagination totalPages={totPages} onPageChange={this.handlePageChange}/>
             </>
         )
     }
