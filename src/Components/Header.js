@@ -8,25 +8,54 @@
 */
 
 import React from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
+
+import Search from "./SearchBar"
+
+var source = [
+    {
+        과목명: "Introduction to Programming",
+        과목코드: "CS101"
+    },
+    {
+        과목명: "Data Structure",
+        과목코드: "CS204"
+    },
+    {
+        과목명: "Introduction to Social Computing",
+        과목코드: "CS473"
+    },
+]
 
 /*
     Header Component
     - returns a menu bar
 */
 export default () => (
-    <Menu borderless size="massive">
+    <Menu inverted borderless size="massive">
         <Menu.Item>
-            JTO:졸업시뮬레이터
+            <Icon circular name="chart pie" /> JTO
         </Menu.Item>
-        <Menu.Item name='about'>
-            About
+
+        <Menu.Item>
+            <Search source={source}/>
         </Menu.Item>
-        <Menu.Item name='google' href="http://www.google.com">
-            Go to Google
+
+        <Menu.Item name='bulletin' href="https://bulletin.kaist.ac.kr/">
+            Bulletin Board
         </Menu.Item>
-        <Menu.Item name='naver' href="http://www.naver.com">
-            Go to Naver
+        <Menu.Item name='open' href="http://portal.kaist.ac.kr/">
+            Open Courses
+        </Menu.Item>
+        <Menu.Item name='notifications' href="http://www.kaist.ac.kr/">
+            Notifications
+        </Menu.Item>
+        <Menu.Item name='feedback' href="/feedback">
+            Feedback
+        </Menu.Item>
+
+        <Menu.Item position="right" name='developers' href="https://github.com/escape-github">
+            Developers
         </Menu.Item>
     </Menu>
 )
