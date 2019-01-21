@@ -4,9 +4,7 @@ import { Menu, Grid, Segment } from 'semantic-ui-react'
 import Profile from './Profile.js'
 import SearchCourse from './SearchCourse.js'
 
-import logo from "./logo.svg";
 import prodo from './prodo.png'
-import './App.css';
 
 class App extends Component {
 
@@ -26,7 +24,7 @@ class App extends Component {
       <>
       <Menu borderless size="massive">
         <Menu.Item>
-          <img src={logo} alt=""/>  JTO:졸업시뮬레이터
+          JTO:졸업시뮬레이터
         </Menu.Item>
         <Menu.Item name='about'>
           About
