@@ -6,12 +6,12 @@ function Profile({name, img, school, major}){
         <Card fluid>
             <Image src={img} />
             <Card.Content>
-                <Card.Header textAlign="center">
+                <Card.Header>
                     {name}
                 </Card.Header>
                 <Card.Description>
                 <Icon name="building"/>{school}
-                <br></br><Icon name="book"/>{major}
+                <br/><Icon name="book"/>{major}
                 </Card.Description>
             </Card.Content>
         </Card>

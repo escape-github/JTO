@@ -1,13 +1,13 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import { Search } from 'semantic-ui-react'
+import { Search, Button, Grid } from 'semantic-ui-react'
 import course from '../course.json'
 
 const source = course
 
 const resultRenderer = ({ 과목명, 과목코드 }) => <div>[{과목코드}] {과목명}</div>
 
-export default class SearchExampleCategory extends Component {
+export default class SearchCourse extends Component {
   
   componentWillMount() {
     this.resetComponent()
@@ -50,18 +50,26 @@ export default class SearchExampleCategory extends Component {
   render() {
     const { isLoading, value, results } = this.state
     return (
-
-          <Search
-            category
-            loading={isLoading}
-            onResultSelect={this.handleResultSelect}
-            onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
-            results={results}
-            value={value}
-            resultRenderer={resultRenderer}
-            {...this.props}
-          />
-
+          <Grid columns="equal" padded="horizontally">
+            <Grid.Column width={8}>
+              <Search
+                category
+                loading={isLoading}
+                onResultSelect={this.handleResultSelect}
+                onSearchChange={_.debounce(this.handleSearchChange, 500, { leading: true })}
+                results={results}
+                value={value}
+                resultRenderer={resultRenderer}
+                input={{placeholder:"Find courses you took", size:"small", fluid:true}}
+                {...this.props}
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <Button>Major:CS</Button>
+              <Button>Semester:2</Button>
+              <Button color="green">Add new</Button>
+            </Grid.Column>
+          </Grid>
     )
   }
 }
