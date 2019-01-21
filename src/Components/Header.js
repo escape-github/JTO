@@ -10,23 +10,6 @@
 import React from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 
-import Search from "./SearchBar"
-
-var source = [
-    {
-        과목명: "Introduction to Programming",
-        과목코드: "CS101"
-    },
-    {
-        과목명: "Data Structure",
-        과목코드: "CS204"
-    },
-    {
-        과목명: "Introduction to Social Computing",
-        과목코드: "CS473"
-    },
-]
-
 /*
     Header Component
     - returns a menu bar
@@ -35,10 +18,6 @@ export default () => (
     <Menu inverted borderless size="massive">
         <Menu.Item>
             <Icon circular name="chart pie" /> JTO
-        </Menu.Item>
-
-        <Menu.Item>
-            <Search source={source}/>
         </Menu.Item>
 
         <Menu.Item name='bulletin' href="https://bulletin.kaist.ac.kr/">

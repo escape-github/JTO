@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
-import Header from "./Components/Header";
-import Body from "./Components/Body";
+import Header from "./components/Header";
+import Body from "./components/Body";
 
 class App extends Component {
   render() {

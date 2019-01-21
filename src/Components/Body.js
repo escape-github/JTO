@@ -12,9 +12,10 @@ import { Grid, Menu } from 'semantic-ui-react';
 
 
 import Profile from "./Body.Profile";
+import Overview from "./Body.Overview";
 import Takens from "./Body.Takens";
-
-import prodo from "../prodo.png";
+import Reviews from "./Body.Reviews";
+import Update from "./Body.Update";
 
 /*
     Body Component
@@ -22,7 +23,7 @@ import prodo from "../prodo.png";
 */
 
 const bodyStyle = {
-    minWidth: "1200px",   
+    minWidth: "1200px",
 };
 
 export default class Body extends Component {
@@ -32,7 +33,6 @@ export default class Body extends Component {
     }
 
     handleItemClick = (e, {name}) =>  {
-        //console.log(name)
         this.setState({bodyBar: name})
     }
     
@@ -41,7 +41,7 @@ export default class Body extends Component {
         return(
             <Grid centered container columns="equal" style={bodyStyle}>
                 <Grid.Column width={3}>
-                    <Profile name="권기훈" img={prodo} school="KAIST" major="SoC" />
+                    <Profile />
                 </Grid.Column>
 
                 <Grid.Column width={12}>
@@ -69,7 +69,10 @@ export default class Body extends Component {
                         </Menu>
                     </Grid.Row><br/>
                     <Grid.Row>
-                        <Takens />
+                        {bodyBar === "Overview" ? <Overview /> : null }
+                        {bodyBar === "Takens" ? <Takens /> : null }
+                        {bodyBar === "Reviews" ? <Reviews /> : null }
+                        {bodyBar === "Update" ? <Update /> : null }
                     </Grid.Row>
                 </Grid.Column>
             </Grid>

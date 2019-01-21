@@ -1,16 +1,60 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { Search, Button, Grid } from 'semantic-ui-react'
-import course from '../course.json'
-
-const source = course
+import Database from '../database/Database.js';
 
 const resultRenderer = ({ 과목명, 과목코드 }) => <div>[{과목코드}] {과목명}</div>
 
 export default class SearchCourse extends Component {
+  state = {
+    source: {}
+  }
   
   componentWillMount() {
     this.resetComponent()
+  }
+
+  componentDidMount() {
+    Database.getJSON({}, '/allcourses')
+    .then(source => {
+      console.log(source);
+      this.source = source;
+    })
+
+    /*
+    Database.putJSON({
+      "전산학부":{
+          "name":"전산학부",
+          "results":[
+              {
+                  "title": "",
+                  "과목명": "이산구조",
+                  "과목코드": "CS204",
+                  "과목구분": "전공필수"
+              },
+              {
+                  "title": "",
+                  "과목명": "프로그래밍기초",
+                  "과목코드": "CS101",
+                  "과목구분": "기초필수"
+              }
+      
+      ]
+      },
+  
+      "수리과학과":{
+          "name":"수리과학과",
+          "results":[
+              {
+                  "title": "",
+                  "과목명": "이산수학",
+                  "과목코드": "MAS260",
+                  "과목구분": "전공필수"
+              }
+      ]
+      }
+  
+    }, '/allcourses'); */
   }
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
@@ -30,7 +74,7 @@ export default class SearchCourse extends Component {
       const isMatch = result => re.test(result["과목명"])
 
       const filteredResults = _.reduce(
-        source,
+        this.source,
         (memo, data, name) => {
           const results = _.filter(data.results, isMatch)
           if (results.length) memo[name] = { name, results }

@@ -1,21 +1,45 @@
-import React from "react"
-import { Image, Card, Icon } from 'semantic-ui-react'
+import React, { Component } from "react"
+import { Image, Card } from 'semantic-ui-react'
+import Database from "../database/Database";
 
-function Profile({name, img, school, major}){
-    return(
-        <Card fluid>
-            <Image src={img} />
-            <Card.Content>
-                <Card.Header>
-                    {name}
-                </Card.Header>
-                <Card.Description>
-                <Icon name="building"/>{school}
-                <br/><Icon name="book"/>{major}
-                </Card.Description>
-            </Card.Content>
-        </Card>
-    )
+export default class Profile extends Component {
+    state = {
+        img: "https://t1.daumcdn.net/brunch/static/img/sticker/frodo/10.png",
+        name: "Username",
+        major: "Major",
+        school: "School",
+        status: "lorem ipsum status"
+    }
+
+    componentDidMount(){
+        Database.getJSON({}, '/user')
+        .then(user => {
+            this.setState({...user});
+        });
+
+        /*
+        Database.putJSON({
+            name: "Kihoon Kwon",
+            major: "SoC",
+            school: "KAIST",
+            status: "Hi, I am Kihoon!"
+        }, '/user'); */
+    }
+
+    render(){
+        return(
+            <Card>
+                <Image src={this.state.img} />
+                <Card.Content>
+                    <Card.Header> {this.state.name} </Card.Header>
+                    <Card.Meta>
+                        {this.state.major} @ {this.state.school}
+                    </Card.Meta>
+                    <Card.Description>
+                        {this.state.status}
+                    </Card.Description>
+                </Card.Content>
+            </Card>
+        )
+    }
 }
-
-export default Profile;
