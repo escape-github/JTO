@@ -1,20 +1,110 @@
 /*
-    Script.js
-    - parse script and make a condition hierarchy
+    Simulation.js
+    - Simulation
 
+    Originally Written by Minkyu Kim
     Created by Juan Lee
 */
 
-var Course = require("./Course.js");        // import Course
-var Condition = require("./Condition.js");  // import Condition
-var fs = require("fs");                     // import fs
+/*
+    class Condition
+    - subconditions: array contains conditions(recursively) or Course(s) (base condition)
+    - requiredNumber: number of conditions should be taken
+    - requiredCredit: number of credits should be taken
+*/
+export class Condition {
+    constructor(subconditions, number, credit){
+        this.subconditions = subconditions;
+        this.requiredNumber = number;
+        this.requiredCredit = credit;
+    }
+
+    /*
+        function getCredit
+        - return the maximum satisfying credit of subconditions
+    */
+    getCredit(taken){
+        var credit = 0;
+        this.subconditions.forEach(cond => {
+            if(cond.check(taken) && credit < cond.credit){
+                credit = cond.credit;
+            }
+        });
+        return credit;
+    }
+
+    /*
+        function check
+        - return true if the condition satisfied, or false
+    */
+    check(taken){
+        // need to satisfy number condition
+        if(this.requiredNumber > 0){
+            var cntSatisfied = this.subconditions.filter(cond => cond.check(taken)).length;
+            if(cntSatisfied < this.requiredNumber){
+                return false;
+            }
+        }
+        // need to satisfy credit condition
+        if(this.requiredCredit > 0){
+            var sumSatisfied = 0;
+            this.subconditions.forEach(cond => {
+                if(cond.check(taken)){
+                    sumSatisfied += cond.getCredit();
+                }
+            });
+            if(sumSatisfied < this.requiredCredit){
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
 
 /*
-    function parseScript
-    - fscript: a script file to read
-    - taken: a course code list to parse
+    class Course
+    - name: course name
+    - code: course code
+    - credit: course credit
+
+    e.g., {"name":"introduction to programming", "code":"CS101", "credit":3}
 */
-function parseScript(fscript, taken){
+export class Course{
+    constructor({name, code, credit}){
+        this.name = name;
+        this.code = code;
+        this.credit = credit;
+    }
+
+    /*
+        function compare
+        - return true if this and given course are identical, or false
+    */
+    compare(other){
+        return (this.name === other.name && this.code === other.code && this.credit === other.credit);
+    }
+
+    /*
+        function check
+        - return true if the course is in taken list, or false
+    */
+    check(taken){
+        for(var i = 0; i < taken.length; i++){
+            if(this.compare(taken[i]))
+                return true;
+        }
+        return false;
+    }
+
+    /*
+        function getCredit
+        - return credit
+    */
+    getCredit = ()=>this.credit;
+}
+
+export default function parseScript(fscript, taken){
     fscript = fscript;
 
     var json = JSON.parse(fs.readFileSync(fscript, "utf8"));
@@ -154,5 +244,3 @@ function parseScript(fscript, taken){
         "taken": parsed_taken
     };
 }
-
-module.exports = parseScript;   // export function parseScript

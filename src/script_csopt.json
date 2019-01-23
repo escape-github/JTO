@@ -1,0 +1,21 @@
+{
+    "courses":[
+        "courses.json"
+    ],
+    "groups":{
+        "#CSOpt": {
+            "filter":{
+                "개설학과":"전산학부",
+                "과목구분":"전공선택"
+            },
+            "include":[]
+        }
+    },
+    "conditions":{
+        "@CSMajorOpt": {
+            "candidates": ["#CSOpt"],
+            "number": 0,
+            "credit": 21
+        }
+    }
+}

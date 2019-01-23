@@ -5,7 +5,7 @@
     Created by Juan Lee
 */
 
-var parseScript = require("./src/Script.js");   // import parseScript
+var parseScript = require("../src/utils/simulation/Script.js");   // import parseScript
 
 var taken = [
     "CS204", "CS206", "CS300", "CS311", "CS320", "CS330", "CS408",

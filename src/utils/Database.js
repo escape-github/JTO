@@ -7,9 +7,13 @@
 
 // class Database
 class Database{
-    constructor(){
-        this.endpoint = process.env.REACT_APP_JSON_ENDPOINT;
+    constructor(endpoint){
+        this.endpoint = endpoint || process.env.REACT_APP_JSON_ENDPOINT;
     }
+
+//---------------------------------------------------------------------------
+// BASIC FUNCTIONS FOR JSON HANDLING
+//---------------------------------------------------------------------------
 
     // getJSON: def -> Promise
     // - return <Promise> of json
@@ -41,6 +45,14 @@ class Database{
     // - clear jsonstore at ENDPOINT
     clearJSON(endpoint){
         this.putJSON(null, endpoint);
+    }
+
+//---------------------------------------------------------------------------
+// SUB-DATABASE HANDLING
+//---------------------------------------------------------------------------
+
+    get(category){
+        return new Database(this.endpoint + "/" + category);
     }
 }
 
