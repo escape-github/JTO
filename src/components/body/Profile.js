@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Image, Card } from 'semantic-ui-react'
+import { Image, Card, Button } from 'semantic-ui-react'
 import Database from "../../utils/Database";
 
 export default class Profile extends Component {
@@ -39,6 +39,7 @@ export default class Profile extends Component {
                         {this.state.status}
                     </Card.Description>
                 </Card.Content>
+                <Button onClick={()=>window.location.href="/edit"}>Edit</Button>
             </Card>
         )
     }
