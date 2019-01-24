@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Segment } from 'semantic-ui-react';
 //import parseScript, { Course, Condition } from "../../../utils/Simulation";
 
 export default class Overview extends Component{
@@ -24,7 +25,9 @@ export default class Overview extends Component{
 
     render() {
         return(
-            <p>{this._simulate()}</p>
+            <Segment>
+                <p>{this._simulate()}</p>
+            </Segment>
         )
     }
 }
