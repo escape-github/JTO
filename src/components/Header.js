@@ -12,7 +12,7 @@ import { Menu, Icon } from 'semantic-ui-react';
     - returns a menu bar
 */
 export default () => (
-    <Menu borderless size="massive" style={{background: "#f1f2f6"}}>
+    <Menu borderless fixed="top" size="massive" style={{background: "#f1f2f6"}}>
         <Menu.Item>
             <Icon name="chart pie" /> JTO
         </Menu.Item>

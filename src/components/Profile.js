@@ -6,7 +6,7 @@
 */
 
 import React, { Component } from "react"
-import { Image, Card } from 'semantic-ui-react'
+import { Image, Card, Input } from 'semantic-ui-react'
 import Database from "../utils/Database";
 
 /* class Profile */
@@ -17,7 +17,12 @@ export default class Profile extends Component {
         name: "Username",
         major: "Major",
         school: "School",
-        status: "lorem ipsum status"
+        status: "lorem ipsum status",
+
+        editProfilePhoto: false,
+        editProfileName: false,
+        editProfileDescription: false,
+        editProfileStatus: false,
     }
 
     // just after created
@@ -29,6 +34,27 @@ export default class Profile extends Component {
         });
     }
 
+    _onNameClicked = ()=>{this.setState({editProfileName: true})};
+    _onNameEntered = (e)=>{
+        if(e.key === 'Enter'){
+            this.setState({editProfileName: false});
+        }
+    }
+
+    _onDescriptionClicked = ()=>{this.setState({editProfileDescription: true})};
+    _onDescriptionEntered = (e)=>{
+        if(e.key === 'Enter'){
+            this.setState({editProfileDescription: false});
+        }
+    }
+
+    _onStatusClicked = ()=>{this.setState({editProfileStatus: true})};
+    _onStatusEntered = (e)=>{
+        if(e.key === 'Enter'){
+            this.setState({editProfileStatus: false});
+        }
+    }
+
     // update the screen
     render(){
         const {img, name, major, school, status} = this.state;
@@ -37,9 +63,9 @@ export default class Profile extends Component {
             <Card>
                 <Image src={img} />
                 <Card.Content>
-                    <Card.Header> {name} </Card.Header>
-                    <Card.Meta> {major} @ {school} </Card.Meta>
-                    <Card.Description> {status} </Card.Description>
+                    {this.state.editProfileName ? <Input placeholder={name} onKeyPress={this._onNameEntered} /> : <Card.Header onClick={this._onNameClicked}> {name} </Card.Header>}
+                    {this.state.editProfileDescription ? <Input placeholder={major + " @ " + school} onKeyPress={this._onDescriptionEntered} /> : <Card.Meta onClick={this._onDescriptionClicked}> {major + " @ " + school} </Card.Meta>}
+                    {this.state.editProfileStatus ? <Input placeholder={status} onKeyPress={this._onStatusEntered} /> : <Card.Description onClick={this._onStatusClicked}> {status} </Card.Description>}
                 </Card.Content>
             </Card>
         )

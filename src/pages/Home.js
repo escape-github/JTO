@@ -16,7 +16,7 @@ class Home extends Component {
     return (
       <Fragment>
         <Header />
-        <Grid centered container columns="equal" style={{minWidth: "1200px"}}>
+        <Grid centered container columns="equal" style={{minWidth: "1200px", marginTop: 20}}>
           <Grid.Column width={3}>
             <Grid.Row>
                 <Profile />
