@@ -20,7 +20,6 @@ export default class Body extends Component {
                 <SearchCourse searched_course={course => this.setState({course})}/>
                 <Divider />
                 <Taken />
-                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             </Segment>
         )
     }
