@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Divider, Grid, Button, Container, Header, Label, Pagination } from 'semantic-ui-react'
+import { AreaChart } from "react-easy-chart";
 import SearchCourse from "./SearchCourse";
 import Database from '../../../../utils/Database';
 
@@ -61,6 +62,21 @@ export default class Takens extends Component{
         var totPages = Math.ceil(courses.length / itemsPerPage)
         return(
             <>
+            <AreaChart
+                interpolate={'cardinal'} 
+                height={200}
+                width={800}
+                data={[
+                    [
+                      { x: 1, y: 20 },
+                      { x: 2, y: 30 },
+                      { x: 3, y: 25 },
+                      { x: 4, y: 40 },
+                      { x: 5, y: 35 },
+                    ]
+                  ]}
+                />
+            <Divider />
             <SearchCourse searched_course={course => this.setState({course})}/>
             <Divider />
             {this.takenList(courses.slice((page-1)*itemsPerPage, Math.min(page*itemsPerPage, courses.length)))}
