@@ -12,6 +12,22 @@ import Overview from '../components/Overview';
 import Status from '../components/Status';
 
 class Home extends Component {
+  state = {
+    loggedIn: null,
+  }
+
+  constructor(props){
+    super(props);
+
+    this._onLoggedIn = this._onLoggedIn.bind(this);
+  }
+
+  _onLoggedIn(user){
+    this.setState({
+      loggedIn: user
+    });
+  }
+
   render() {
     return (
       <Fragment>
@@ -19,15 +35,15 @@ class Home extends Component {
         <Grid centered container columns="equal" style={{minWidth: "1200px", marginTop: 20}}>
           <Grid.Column width={3}>
             <Grid.Row>
-                <Profile />
+                <Profile _onLoggedIn = {this._onLoggedIn} />
             </Grid.Row>
             <Grid.Row style={{marginTop: 10}}>
-                <Overview />
+                <Overview user={this.state.loggedIn} />
             </Grid.Row>
           </Grid.Column>
 
           <Grid.Column width={12}>
-            <Status />
+            <Status user={this.state.loggedIn} />
           </Grid.Column>
         </Grid>
       </Fragment>

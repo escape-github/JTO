@@ -5,7 +5,7 @@
 */
 
 import React, { Component } from 'react';
-import Taken from './StatusList';
+import StatusList from './StatusList';
 import CourseChart from './StatusChart';
 import { Divider, Segment } from 'semantic-ui-react';
 import SearchCourse from './StatusSearch';
@@ -15,11 +15,11 @@ export default class Body extends Component {
     render() {
         return(
             <Segment raised>
-                <CourseChart />
+                <CourseChart user={this.props.user} />
                 <Divider />
-                <SearchCourse searched_course={course => this.setState({course})}/>
+                <SearchCourse user={this.props.user} searched_course={course => this.setState({course})}/>
                 <Divider />
-                <Taken />
+                <StatusList user={this.props.user} />
             </Segment>
         )
     }
