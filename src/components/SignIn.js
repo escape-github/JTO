@@ -94,7 +94,7 @@ class SignIn extends Component {
 
   render() {
     return (
-      <Modal size="mini" open={this.state.open} style={{padding: 10}}>
+      <Modal size="mini" open={this.state.open} style={{padding: 10}} closeOnEscape={true} closeOnDimmerClick={true} onClose={()=>{this.setState({open: false}, this.props._onFinished(null))}}>
         <Modal.Header>{this.state.signup ? "You need to sign up first!" : "Welcome Back!"}</Modal.Header>
         <Modal.Content>
           <Form>

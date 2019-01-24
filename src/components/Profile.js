@@ -29,6 +29,12 @@ export default class Profile extends Component {
         open: false
     }
 
+    constructor(props){
+        super(props);
+
+        this._onFinishedLogin = this._onFinishedLogin.bind(this);
+    }
+
     // just after created
     componentDidMount(){
         // get user data from database
@@ -60,10 +66,18 @@ export default class Profile extends Component {
     }
 
     _onFinishedLogin = (user) => {
-        this.setState({
-            name: user,
-            auth: true
-        });
+        if(user){
+            this.setState({
+                name: user,
+                auth: true
+            });
+        }
+        else{
+            this.setState({
+                auth: false,
+                open: false
+            })
+        }
     }
 
     // update the screen
@@ -72,7 +86,7 @@ export default class Profile extends Component {
 
         return(
             <Fragment>
-                {open ? <SignIn _onFinished={this._onFinishedLogin.bind(this)} /> : null}
+                {open ? <SignIn _onFinished={this._onFinishedLogin} /> : null}
                 {auth ? <Card>
                     <Image src={img} />
                     <Card.Content>

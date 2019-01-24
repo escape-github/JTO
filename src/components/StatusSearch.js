@@ -17,44 +17,8 @@ export default class StatusSearch extends Component {
   componentDidMount() {
     Database.getJSON({}, '/allcourses')
     .then(source => {
-      console.log(source);
       this.source = source;
     })
-
-    /*
-    Database.putJSON({
-      "전산학부":{
-          "name":"전산학부",
-          "results":[
-              {
-                  "title": "",
-                  "과목명": "이산구조",
-                  "과목코드": "CS204",
-                  "과목구분": "전공필수"
-              },
-              {
-                  "title": "",
-                  "과목명": "프로그래밍기초",
-                  "과목코드": "CS101",
-                  "과목구분": "기초필수"
-              }
-      
-      ]
-      },
-  
-      "수리과학과":{
-          "name":"수리과학과",
-          "results":[
-              {
-                  "title": "",
-                  "과목명": "이산수학",
-                  "과목코드": "MAS260",
-                  "과목구분": "전공필수"
-              }
-      ]
-      }
-  
-    }, '/allcourses'); */
   }
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
@@ -105,7 +69,6 @@ export default class StatusSearch extends Component {
                 value={value}
                 resultRenderer={resultRenderer}
                 input={{placeholder:"Find courses you took", size:"small", fluid:true}}
-                {...this.props}
               />
             </Grid.Column>
             <Grid.Column>
