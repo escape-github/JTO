@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
-import { Search, Button, Grid } from 'semantic-ui-react'
+import { Search, Button, Grid, Dropdown } from 'semantic-ui-react'
 import Database from '../utils/Database';
 
 const resultRenderer = ({ 과목명, 과목코드 }) => <div>[{과목코드}] {과목명}</div>
@@ -72,8 +72,19 @@ export default class StatusSearch extends Component {
               />
             </Grid.Column>
             <Grid.Column>
-              <Button>Major:CS</Button>
-              <Button>Semester:2</Button>
+              <Dropdown text="Major" button>
+                <Dropdown.Menu>
+                  <Dropdown.Item>CS</Dropdown.Item>
+                </Dropdown.Menu>
+                </Dropdown>
+              <Dropdown text="Semester" button>
+                <Dropdown.Menu>
+                  <Dropdown.Item>1/Spring</Dropdown.Item>
+                  <Dropdown.Item>1/Fall</Dropdown.Item>
+                  <Dropdown.Item>2/Spring</Dropdown.Item>
+                  <Dropdown.Item>2/Fall</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
               <Button color="green">Add new</Button>
             </Grid.Column>
           </Grid>
