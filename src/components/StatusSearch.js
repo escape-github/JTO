@@ -1,11 +1,11 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { Search, Button, Grid } from 'semantic-ui-react'
-import Database from '../../../../utils/Database';
+import Database from '../utils/Database';
 
 const resultRenderer = ({ 과목명, 과목코드 }) => <div>[{과목코드}] {과목명}</div>
 
-export default class SearchCourse extends Component {
+export default class StatusSearch extends Component {
   state = {
     source: {}
   }
