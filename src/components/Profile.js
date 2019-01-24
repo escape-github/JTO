@@ -5,9 +5,10 @@
     Image, Name, Description, Status
 */
 
-import React, { Component } from "react"
-import { Image, Card, Input } from 'semantic-ui-react'
+import React, { Component, Fragment } from "react"
+import { Image, Card, Input, Button } from 'semantic-ui-react'
 import Database from "../utils/Database";
+import SignIn from "./SignIn";
 
 /* class Profile */
 export default class Profile extends Component {
@@ -23,6 +24,9 @@ export default class Profile extends Component {
         editProfileName: false,
         editProfileDescription: false,
         editProfileStatus: false,
+
+        auth: false,
+        open: false
     }
 
     // just after created
@@ -55,19 +59,29 @@ export default class Profile extends Component {
         }
     }
 
+    _onFinishedLogin = (user) => {
+        this.setState({
+            name: user,
+            auth: true
+        });
+    }
+
     // update the screen
     render(){
-        const {img, name, major, school, status} = this.state;
+        const {img, name, major, school, status, auth, open} = this.state;
 
         return(
-            <Card>
-                <Image src={img} />
-                <Card.Content>
-                    {this.state.editProfileName ? <Input placeholder={name} onKeyPress={this._onNameEntered} /> : <Card.Header onClick={this._onNameClicked}> {name} </Card.Header>}
-                    {this.state.editProfileDescription ? <Input placeholder={major + " @ " + school} onKeyPress={this._onDescriptionEntered} /> : <Card.Meta onClick={this._onDescriptionClicked}> {major + " @ " + school} </Card.Meta>}
-                    {this.state.editProfileStatus ? <Input placeholder={status} onKeyPress={this._onStatusEntered} /> : <Card.Description onClick={this._onStatusClicked}> {status} </Card.Description>}
-                </Card.Content>
-            </Card>
+            <Fragment>
+                {open ? <SignIn _onFinished={this._onFinishedLogin.bind(this)} /> : null}
+                {auth ? <Card>
+                    <Image src={img} />
+                    <Card.Content>
+                        {this.state.editProfileName ? <Input placeholder={name} onKeyPress={this._onNameEntered} /> : <Card.Header onClick={this._onNameClicked}> {name} </Card.Header>}
+                        {this.state.editProfileDescription ? <Input placeholder={major + " @ " + school} onKeyPress={this._onDescriptionEntered} /> : <Card.Meta onClick={this._onDescriptionClicked}> {major + " @ " + school} </Card.Meta>}
+                        {this.state.editProfileStatus ? <Input placeholder={status} onKeyPress={this._onStatusEntered} /> : <Card.Description onClick={this._onStatusClicked}> {status} </Card.Description>}
+                    </Card.Content>
+                </Card> : <Button fluid basic onClick={()=>{this.setState({open: true})}}>Login</Button>}
+            </Fragment>
         )
     }
 }
