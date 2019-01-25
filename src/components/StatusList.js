@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Divider, Header, Segment } from 'semantic-ui-react'
+import { Divider, Header, Segment, Button } from 'semantic-ui-react'
 import Scrollbar from 'react-scrollbars-custom'
 import Database from '../utils/Database';
 
@@ -23,12 +23,12 @@ export default class StatusList extends Component{
         return courses.map(e => {
             return(
                 <Fragment>
+                    <Segment basic floated="right">
+                        <Button>TEST</Button>
+                    </Segment>
                     <Segment basic>
                         <Header>{e.title}</Header>
                         <p>Description</p>
-                    </Segment>
-                    <Segment basic floated="right" textAlign="justified">
-                        <p>Something</p>
                     </Segment>
                     <Divider />
                 </Fragment>
