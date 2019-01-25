@@ -31,7 +31,7 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
+        <Header user={this.state.loggedIn} />
         <Grid centered container columns="equal" style={{minWidth: "1200px", marginTop: 20}}>
           <Grid.Column width={3}>
             <Grid.Row>

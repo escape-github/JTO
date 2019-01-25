@@ -59,7 +59,7 @@ export default class StatusSearch extends Component {
     const { isLoading, value, results } = this.state
     return (
           <Grid columns="equal" padded="horizontally">
-            <Grid.Column width={8}>
+            <Grid.Column width={9}>
               <Search
                 category
                 loading={isLoading}

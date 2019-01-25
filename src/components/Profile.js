@@ -41,16 +41,19 @@ export default class Profile extends Component {
             Database.get("users").get(this.state.user.profile.username).get("profile").get("updatedAt").putJSON(new Date());
             Database.get("users").get(this.state.user.profile.username).get("profile").get("name").putJSON(this.name)
             .then(() => {
+                var updated = {
+                    ...this.state.user,
+                    profile: {
+                        ...this.state.user.profile,
+                        name: this.name
+                    }
+                };
+
                 this.setState({
                     editProfileName: false,
-                    user: {
-                        ...this.state.user,
-                        profile: {
-                            ...this.state.user.profile,
-                            name: this.name
-                        }
-                    }
+                    user: updated
                 });
+                this.props._onLoggedIn(updated);
             })
         }
     }
@@ -68,16 +71,19 @@ export default class Profile extends Component {
             Database.get("users").get(this.state.user.profile.username).get("profile").get("updatedAt").putJSON(new Date());
             Database.get("users").get(this.state.user.profile.username).get("profile").get("status").putJSON(this.status)
             .then(() => {
+                var updated = {
+                    ...this.state.user,
+                    profile: {
+                        ...this.state.user.profile,
+                        status: this.status
+                    }
+                };
+
                 this.setState({
                     editProfileStatus: false,
-                    user: {
-                        ...this.state.user,
-                        profile: {
-                            ...this.state.user.profile,
-                            status: this.status
-                        }
-                    }
-                })
+                    user: updated,
+                });
+                this.props._onLoggedIn(updated);
             })
         }
     }
