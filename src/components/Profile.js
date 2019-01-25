@@ -33,6 +33,19 @@ export default class Profile extends Component {
         super(props);
 
         this._onFinishedLogin = this._onFinishedLogin.bind(this);
+
+        var json = localStorage.getItem("auth");
+        if(json){
+            var authInfo = JSON.parse(json);
+            Database.get("users").get(authInfo.username).getJSON({profile:{}, taken:[]})
+            .then(user => {
+                this.setState({
+                    user,
+                    auth: true
+                });
+                this.props._onLoggedIn(user);
+            });
+        }
     }
 
     _onNameClicked = ()=>{this.setState({editProfileName: true})};

@@ -59,6 +59,11 @@ class SignIn extends Component {
 			this.setState({
 				open: false
 			});
+			localStorage.setItem("auth", JSON.stringify({
+				username: newuser.profile.username,
+				password: newuser.profile.password,
+				createdAt: new Date(),
+			}));
 		});
 	}
 
@@ -71,6 +76,11 @@ class SignIn extends Component {
 					open: false
 				});
 				Database.get("users").get(this.username).get("lastLogin").putJSON(new Date());
+				localStorage.setItem("auth", JSON.stringify({
+					username: user.profile.username,
+					password: user.profile.password,
+					createdAt: new Date(),
+				}));
 			}
 			else{
 				this.setState({
