@@ -5,9 +5,35 @@ import Database from '../utils/Database';
 
 const resultRenderer = ({ 과목명, 과목코드 }) => <div>[{과목코드}] {과목명}</div>
 
+
+const depOpt = [
+  {
+    text: "CS",
+    value: "CS"
+  },
+  {
+    text: "MAS",
+    value: "MAS"
+  },
+  {
+    text: "EE",
+    value: "EE"
+  },
+  {
+    text: "CH",
+    value: "CH"
+  },
+  {
+    text: "PH",
+    value: "PH"
+  },
+]
+
 export default class StatusSearch extends Component {
   state = {
-    source: {}
+    source: {},
+    major: null,
+    semester: null,
   }
   
   componentWillMount() {
@@ -56,7 +82,7 @@ export default class StatusSearch extends Component {
   }
 
   render() {
-    const { isLoading, value, results } = this.state
+    const { isLoading, value, results, semester } = this.state
     return (
           <Grid columns="equal" padded="horizontally">
             <Grid.Column width={9}>
@@ -72,19 +98,9 @@ export default class StatusSearch extends Component {
               />
             </Grid.Column>
             <Grid.Column>
-              <Dropdown text="Major" button>
-                <Dropdown.Menu>
-                  <Dropdown.Item>CS</Dropdown.Item>
-                </Dropdown.Menu>
-                </Dropdown>
-              <Dropdown text="Semester" button>
-                <Dropdown.Menu>
-                  <Dropdown.Item>1/Spring</Dropdown.Item>
-                  <Dropdown.Item>1/Fall</Dropdown.Item>
-                  <Dropdown.Item>2/Spring</Dropdown.Item>
-                  <Dropdown.Item>2/Fall</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+              <Dropdown multiple selection options={depOpt} />
+              <Dropdown text={semester? semester : "Semester"} options={depOpt} button 
+                        onChange={(e, {value}) => {this.setState({semester: value})}} />
               <Button color="green">Add new</Button>
             </Grid.Column>
           </Grid>

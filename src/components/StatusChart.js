@@ -1,56 +1,69 @@
 import React, { Component } from 'react'
-import { BarChart } from "react-easy-chart";
-import Database from '../utils/Database';
+import ReactHighcharts from 'react-highcharts'
 
-export default class StatusChart extends Component{
-    state = {
-        data: [
-            {x: "A", y: 1},
-            {x: "B", y: 1},
-            {x: "C", y: 1},
-            {x: "D", y: 1},
-            {x: "E", y: 1},
-            {x: "F", y: 1},
-            {x: "G", y: 1},
-            {x: "H", y: 1},
-        ]
-    }
-
-    _makeChartFromDB(){
-        if(this.props.user){
-            var preprocess = {};
-            Database.get("users").get(this.props.user.profile.username).get("taken").getJSON([])
-            .then(courses => {
-                courses.forEach(course => {
-                    if(preprocess[course.semester]){
-                        preprocess[course.semester] += course.credit;
-                    }
-                    else{
-                        preprocess[course.semester] = course.credit;
-                    }
-                });
-
-                var data = [];
-                Object.keys(preprocess).forEach(semester => {
-                    var posx = String.fromCharCode('A'.charCodeAt(0) + semester - 1);
-                    data.push({x: posx, y: preprocess[semester]});
-                });
-                this.setState({data});
-            });
+const config = {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Title'
+    },
+    xAxis: {
+        categories: ['1/Spring', '1/Fall', '2/Spring', '2/Fall', '3/Spring']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'credits'
+        },
+        stackLabels: {
+            enabled: true,
+            style: {
+                fontWeight: 'bold',
+                color: 'gray'
+            }
         }
-    }
+    },
+    legend: {
+        align: 'right',
+        x: -30,
+        verticalAlign: 'top',
+        y: 25,
+        floating: true,
+        backgroundColor:'white',
+        borderColor: '#CCC',
+        borderWidth: 1,
+        shadow: false
+    },
+    tooltip: {
+        headerFormat: '<b>{point.x}</b><br/>',
+        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal',
+            dataLabels: {
+                enabled: false,
+                color: 'white'
+            }
+        }
+    },
+    series: [{
+        name: 'Major',
+        data: [5, 3, 4, 7, 2]
+    }, {
+        name: 'General',
+        data: [2, 2, 3, 2, 1]
+    }, {
+        name: 'Basic',
+        data: [3, 4, 4, 2, 5]
+    }]
+};
 
+export default class CourseChart extends Component {
     render() {
-        this._makeChartFromDB();
-
-        var {data} = this.state;
-        return(
-            <BarChart
-                colorBars
-                width={300}
-                margin={{top: 10, right: 0, bottom: 0, left: 30}}
-                data={data}
-            />
+        return (
+            <ReactHighcharts config={config} />
         )
     }
 }
