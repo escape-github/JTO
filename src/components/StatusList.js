@@ -28,7 +28,7 @@ export default class StatusList extends Component{
                     </Segment>
                     <Segment basic>
                         <Header>{e.title}</Header>
-                        <p>Description</p>
+                        <p>{e.semester} @ {e.credit}</p>
                     </Segment>
                     <Divider />
                 </Fragment>
