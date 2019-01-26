@@ -1,32 +1,9 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { Search, Button, Grid, Dropdown } from 'semantic-ui-react'
+import { CourseDB } from '../utils/Database';
 
-const resultRenderer = ({ 과목명, 과목코드 }) => <div>[{과목코드}] {과목명}</div>
-
-
-const depOpt = [
-  {
-    text: "CS",
-    value: "CS"
-  },
-  {
-    text: "MAS",
-    value: "MAS"
-  },
-  {
-    text: "EE",
-    value: "EE"
-  },
-  {
-    text: "CH",
-    value: "CH"
-  },
-  {
-    text: "PH",
-    value: "PH"
-  },
-]
+const resultRenderer = ({ title, code }) => <div>[{code}] {title}</div>
 
 export default class StatusSearch extends Component {
   state = {
@@ -34,24 +11,44 @@ export default class StatusSearch extends Component {
     major: null,
     semester: null,
   }
-  
+
   componentWillMount() {
     this.resetComponent()
   }
 
   componentDidMount() {
-    /*
-    Database.getJSON({}, '/allcourses')
-    .then(source => {
-      this.source = source;
-    }) */
+    CourseDB.get('data').getJSON([])
+    .then(courses => {
+      this.source = this._generateSearchOptions(courses);
+      this.departments = Object.keys(this.source).map(dep => ({text: dep, value: dep}));
+
+      this.resetComponent();
+    });
+  }
+
+  _generateSearchOptions(courses){
+    var options = {};
+    courses.forEach(course => {
+      if(options[course.department]){
+        options[course.department].results.push(course);
+      }
+      else{
+        options[course.department] = {
+          name: course.department,
+          results: [
+            course
+          ]
+        };
+      }
+    });
+    return options;
   }
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
 
   handleResultSelect = (e, { result }) => {
     this.props.searched_course(result)
-    this.setState({ value: result["과목명"] })
+    this.setState({ value: result.title })
   }
 
   handleSearchChange = (e, { value }) => {
@@ -61,7 +58,7 @@ export default class StatusSearch extends Component {
       if (this.state.value.length < 1) return this.resetComponent()
 
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = result => re.test(result["과목명"])
+      const isMatch = result => re.test(result.title)
 
       const filteredResults = _.reduce(
         this.source,
@@ -82,7 +79,8 @@ export default class StatusSearch extends Component {
   }
 
   render() {
-    const { isLoading, value, results, semester } = this.state
+    const { isLoading, value, results, semester } = this.state;
+
     return (
           <Grid columns="equal" padded="horizontally">
             <Grid.Column width={9}>
@@ -98,9 +96,9 @@ export default class StatusSearch extends Component {
               />
             </Grid.Column>
             <Grid.Column>
-            <Dropdown basic text={semester? semester : "Major"} options={depOpt} button 
+            <Dropdown basic text={semester? semester : "Major"} options={this.departments} button 
                         onChange={(e, {value}) => {this.setState({semester: value})}} />
-              <Dropdown basic text={semester? semester : "Semester"} options={depOpt} button 
+              <Dropdown basic text={semester? semester : "Semester"} options={this.departments} button 
                         onChange={(e, {value}) => {this.setState({semester: value})}} />
               <Button color="green">Add new</Button>
             </Grid.Column>
