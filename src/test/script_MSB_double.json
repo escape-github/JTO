@@ -33,7 +33,7 @@
             "credit": 6
         },
         "@MSBMajor": {
-            "candidates": ["@MSBMajorMand", "@MSBOpt/MSBMajorOpt"],
+            "candidates": ["@MSBMajorMand", "@MSBMajorOpt"],
             "number": 2,
             "credit": 0
         }
