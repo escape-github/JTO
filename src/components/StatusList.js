@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Divider, Header, Segment, Button } from 'semantic-ui-react'
 import Scrollbar from 'react-scrollbars-custom'
-import Database from '../utils/Database';
+import { UserDB } from '../utils/Database';
 
 /* class StatusList */
 export default class StatusList extends Component{
@@ -12,7 +12,7 @@ export default class StatusList extends Component{
 
     _getCourses(){
         if(this.props.user){
-            Database.get("users").get(this.props.user.profile.username).get("taken").getJSON([])
+            UserDB.get(this.props.user.profile.username).get("taken").getJSON([])
             .then(courses=>{
                 this.setState({courses});
             });

@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import { Search, Button, Grid, Dropdown } from 'semantic-ui-react'
-import Database from '../utils/Database';
 
 const resultRenderer = ({ 과목명, 과목코드 }) => <div>[{과목코드}] {과목명}</div>
 
@@ -41,10 +40,11 @@ export default class StatusSearch extends Component {
   }
 
   componentDidMount() {
+    /*
     Database.getJSON({}, '/allcourses')
     .then(source => {
       this.source = source;
-    })
+    }) */
   }
 
   resetComponent = () => this.setState({ isLoading: false, results: [], value: '' })
@@ -98,8 +98,9 @@ export default class StatusSearch extends Component {
               />
             </Grid.Column>
             <Grid.Column>
-              <Dropdown multiple selection options={depOpt} />
-              <Dropdown text={semester? semester : "Semester"} options={depOpt} button 
+            <Dropdown basic text={semester? semester : "Major"} options={depOpt} button 
+                        onChange={(e, {value}) => {this.setState({semester: value})}} />
+              <Dropdown basic text={semester? semester : "Semester"} options={depOpt} button 
                         onChange={(e, {value}) => {this.setState({semester: value})}} />
               <Button color="green">Add new</Button>
             </Grid.Column>

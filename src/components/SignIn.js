@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Modal, Button, Message } from "semantic-ui-react";
-import Database from '../utils/Database';
+import { UserDB } from '../utils/Database';
 
 class SignIn extends Component {
 	state = {
@@ -27,7 +27,7 @@ class SignIn extends Component {
 			return;
 		}
 
-		var user = await Database.get("users").get(this.username).getJSON(null);
+		var user = await UserDB.get(this.username).getJSON(null);
 		if(user){	// user already exists
 			this.setState({
 				password_error: "Email Already Exists"
@@ -53,7 +53,7 @@ class SignIn extends Component {
 			lastLogin: new Date()
 		};
 
-		Database.get("users").get(this.username).putJSON(newuser)
+		UserDB.get(this.username).putJSON(newuser)
 		.then(()=>{
 			this.props._onFinished(newuser);
 			this.setState({
@@ -68,14 +68,14 @@ class SignIn extends Component {
 	}
 
 	async _signIn(){
-		var user = await Database.get("users").get(this.username).getJSON(null);
+		var user = await UserDB.get(this.username).getJSON(null);
 		if(user){	// if user already exists
 			if(user.profile.password === this.password){	// correct
 				this.props._onFinished(user);
 				this.setState({
 					open: false
 				});
-				Database.get("users").get(this.username).get("lastLogin").putJSON(new Date());
+				UserDB.get(this.username).get("lastLogin").putJSON(new Date());
 				localStorage.setItem("auth", JSON.stringify({
 					username: user.profile.username,
 					password: user.profile.password,

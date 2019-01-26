@@ -12,6 +12,10 @@ import { Menu, Icon } from 'semantic-ui-react';
     - returns a menu bar
 */
 export default class Header extends Component {
+    _logout(){
+        localStorage.setItem("auth", null);
+    }
+
     render(){
         return (
             <Menu borderless fixed="top" size="massive" style={{background: "#f1f2f6"}}>
@@ -22,6 +26,13 @@ export default class Header extends Component {
                 <Menu.Item>
                     {this.props.user ? <p>{"Hi, " + this.props.user.profile.name}</p> : "Loggin First"}
                 </Menu.Item>
+
+                {this.props.user ? 
+                <Menu.Item onClick={this._logout} href="/">
+                    Logout
+                </Menu.Item>
+                : null
+                }
 
                 <Menu.Item position="right" name='developers' href="https://github.com/escape-github">
                     Developers
