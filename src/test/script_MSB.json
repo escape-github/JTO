@@ -1,7 +1,8 @@
 {
-    "courses":[
-        "courses_2018_Fall.json"
-    ],
+    "courses":{
+        "courses_2018_Fall.json": "2018_Fall",
+        "courses_2019_Spring.json": "2019_Spring"
+    },
     "groups":{
         "#MSBMand":{
             "filter":{
@@ -40,7 +41,7 @@
             "credit": 0
         },
         "@MSBMajor": {
-            "candidates": ["@MSBMajorMand", "@MSBOpt/MSBMajorOpt"],
+            "candidates": ["@MSBMajorMand", "@MSBMajorOpt"],
             "number": 2,
             "credit": 0
         }

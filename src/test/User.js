@@ -33,6 +33,10 @@ export class User {
 		var Major = script.conditions[`@${this.major}Major`];
 		var parsedTaken = script.taken;
 
+		console.log(script.conditions[`@${this.major}MajorMand`].check(parsedTaken))
+		console.log(script.conditions[`@${this.major}MajorOpt`].check(parsedTaken))
+		console.log(script.conditions[`@${this.major}MajorOptOther`].check(parsedTaken))
+
 		return Major.check(parsedTaken);
 	}
 }

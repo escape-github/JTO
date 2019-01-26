@@ -13,7 +13,7 @@
     - requiredCredit: number of credits should be taken
 */
 export class Condition {
-    constructor({subconditions, number, credit, max}){
+    constructor(subconditions, number, credit, max){
         this.subconditions = subconditions;
         this.requiredNumber = number;
         this.requiredCredit = credit;
@@ -54,7 +54,7 @@ export class Condition {
             var sumSatisfied = 0;
             this.subconditions.forEach(cond => {
                 if(cond.check(taken)){
-                    sumSatisfied += cond.getCredit();
+                    sumSatisfied += cond.getCredit(taken);
                 }
             });
             if(sumSatisfied < this.requiredCredit){
@@ -117,9 +117,9 @@ export default function parseScript(fscript, taken){
     var parsed_courses = [];
     var raw_courses = [];
     if(courses){
-        courses.forEach(jsonfile => {
+        Object.keys(courses).forEach(jsonfile => {
             var courseFile = require(`./${jsonfile}`);
-            raw_courses = courseFile["2018_Fall"];
+            raw_courses = courseFile[courses[jsonfile]];
             raw_courses.forEach(course => {
                 parsed_courses.push(new Course({
                     name: course["과목명"], 
@@ -127,7 +127,7 @@ export default function parseScript(fscript, taken){
                     credit: course["강:실:학"]["학점"]
                 }));
             });
-        });
+        })
     }
 
     // parse imports

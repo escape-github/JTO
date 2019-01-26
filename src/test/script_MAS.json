@@ -1,7 +1,8 @@
 {
-    "courses":[
-        "courses_2018_Fall.json"
-    ],
+    "courses":{
+        "courses_2018_Fall.json": "2018_Fall",
+        "courses_2019_Spring.json": "2019_Spring"
+    },
     "groups":{
         "#MASMand" : ["MAS212", "MAS241", "MAS311", "MAS321", "MAS331", "MAS341", "MAS355"],
         "#MASOpt": {
@@ -34,7 +35,7 @@
             "credit": 0
         },
         "@MASMajor": {
-            "candidates": ["@MASMajorMand", "@MASOpt/MASMajorOpt"],
+            "candidates": ["@MASMajorMand", "@MASMajorOpt"],
             "number": 2,
             "credit": 0
         }

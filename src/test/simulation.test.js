@@ -14,7 +14,7 @@ var taken = [
     "MAS272", "MAS370", "MAS430", "MAS441", "MAS442", "MAS456", "MAS476", "MAS477", "MAS480",
     "EE202"
 ];
-var track = {major: "MSB", minor: "MSB", doubleMajor: null, advanced: null, individual: null};
+var track = {major: "MAS", minor: "MSB", doubleMajor: null, advanced: null, individual: null};
 var user = new User(taken, track);
 
-export default user.checkMajor();
+console.log(user.checkMajor());

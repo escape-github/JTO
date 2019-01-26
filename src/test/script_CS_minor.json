@@ -1,7 +1,8 @@
 {
-    "courses":[
-        "courses.json"
-    ],
+    "courses":{
+        "courses_2018_Fall.json": "2018_Fall",
+        "courses_2019_Spring.json": "2019_Spring"
+    },
     "imports":{
         "CS": "script_CS.json"
     },

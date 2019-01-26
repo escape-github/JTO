@@ -13,7 +13,7 @@
     - requiredCredit: number of credits should be taken
 */
 export class Condition {
-    constructor({subconditions, number, credit, max}){
+    constructor(subconditions, number, credit, max){
         this.subconditions = subconditions;
         this.requiredNumber = number;
         this.requiredCredit = credit;
@@ -54,7 +54,7 @@ export class Condition {
             var sumSatisfied = 0;
             this.subconditions.forEach(cond => {
                 if(cond.check(taken)){
-                    sumSatisfied += cond.getCredit();
+                    sumSatisfied += cond.getCredit(taken);
                 }
             });
             if(sumSatisfied < this.requiredCredit){
