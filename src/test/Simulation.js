@@ -57,6 +57,7 @@ export class Condition {
                     sumSatisfied += cond.getCredit(taken);
                 }
             });
+
             if(sumSatisfied < this.requiredCredit){
                 return false;
             }
@@ -119,15 +120,16 @@ export default function parseScript(fscript, taken){
     if(courses){
         Object.keys(courses).forEach(jsonfile => {
             var courseFile = require(`./${jsonfile}`);
-            raw_courses = courseFile[courses[jsonfile]];
-            raw_courses.forEach(course => {
-                parsed_courses.push(new Course({
-                    name: course["과목명"], 
-                    code: course["과목번호"], 
-                    credit: course["강:실:학"]["학점"]
-                }));
-            });
-        })
+            raw_courses.push.apply(raw_courses, courseFile[courses[jsonfile]]);
+        });
+
+        raw_courses.forEach(course => {
+            parsed_courses.push(new Course({
+                name: course["과목명"], 
+                code: course["과목번호"], 
+                credit: course["강:실:학"]["학점"]
+            }));
+        });
     }
 
     // parse imports

@@ -8,7 +8,7 @@
     },
     "conditions":{
         "@MASMajor": {
-            "candidates": ["@MAS/MASOpt"],
+            "candidates": ["#MAS/MASOpt"],
             "number": 0,
             "credit": 18
         }

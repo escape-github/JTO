@@ -33,10 +33,24 @@ export class User {
 		var Major = script.conditions[`@${this.major}Major`];
 		var parsedTaken = script.taken;
 
-		console.log(script.conditions[`@${this.major}MajorMand`].check(parsedTaken))
-		console.log(script.conditions[`@${this.major}MajorOpt`].check(parsedTaken))
-		console.log(script.conditions[`@${this.major}MajorOptOther`].check(parsedTaken))
-
 		return Major.check(parsedTaken);
 	}
+
+	checkMinor(){
+		var script = parseScript(`script_${this.minor}_minor.json`, this.taken);
+  
+		var Major = script.conditions[`@${this.minor}Major`];
+		var parsedTaken = script.taken;
+  
+		return Major.check(parsedTaken); 
+	 }
+
+	 checkDoubleMajor(){
+		var script = parseScript(`script_${this.doubleMajor}_double.json`, this.taken);
+  
+		var Major = script.conditions[`@${this.doubleMajor}Major`];
+		var parsedTaken = script.taken;
+  
+		return Major.check(parsedTaken); 
+	 }
 }
