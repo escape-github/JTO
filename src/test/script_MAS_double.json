@@ -8,23 +8,23 @@
     },
     "conditions":{
         "@MASMajorOptOther": {
-            "candidates": ["#Other"],
+            "candidates": ["#MAS/Other"],
             "number": 0,
             "credit": 0,
             "max": 6
         },
         "@MASMajorOpt": {
-            "candidates": ["#MASOpt","@MASMajorOptOther"],
+            "candidates": ["#MAS/MASOpt","@MASMajorOptOther"],
             "number": 0,
             "credit": 40
         },
         "@MASMajorMand": {
-            "candidates": ["#MASMand"],
+            "candidates": ["#MAS/MASMand"],
             "number": 4,
             "credit": 0
         },
         "@MASMajor": {
-            "candidates": ["@MASMajorMand", "@MASOpt/MASMajorOpt"],
+            "candidates": ["@MASMajorMand", "@MASMajorOpt"],
             "number": 2,
             "credit": 0
         }
