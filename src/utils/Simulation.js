@@ -31,8 +31,8 @@ export class Condition {
                 credit = cond.credit;
             }
         });
-        if (max){
-            return Math.min(credit, max);
+        if (this.max){
+            return Math.min(credit, this.max);
         }
         return credit;
     }
@@ -109,9 +109,7 @@ export class Course{
 }
 
 export default function parseScript(fscript, taken){
-    fscript = fscript;
-
-    var json = JSON.parse(fs.readFileSync(fscript, "utf8"));
+    var json = require(`./${fscript}`);
     var { courses, imports, groups, conditions } = json;
 
     // parse Courses from script
@@ -120,7 +118,7 @@ export default function parseScript(fscript, taken){
     var raw_courses = [];
     if(courses){
         courses.forEach(jsonfile => {
-            var courseFile = JSON.parse(fs.readFileSync(jsonfile, "utf8"));
+            var courseFile = require(`./${jsonfile}`);
             raw_courses = courseFile["2018_Fall"];
             raw_courses.forEach(course => {
                 parsed_courses.push(new Course({
@@ -155,8 +153,9 @@ export default function parseScript(fscript, taken){
     if(groups){
         Object.keys(groups).forEach(key => {
             var group = groups[key];
-            if(group.constructor == Object){
-                var result = raw_courses;
+            var result = [];
+            if(group.constructor === Object){
+                result = raw_courses;
                 if(group.filter){    // filter
                     Object.keys(group.filter).forEach(field => {
                         result = result.filter(course => course[field] === group.filter[field]);
@@ -176,19 +175,18 @@ export default function parseScript(fscript, taken){
                 if(group.exclude){  // exclude
                     group.exclude.forEach(code => {
                         if(code.charAt(0) === "#"){
-                            exclude_group = parsed_groups[code];
-                            result = result.filter(course => exclude_group.indexOf(course) == -1)
+                            var exclude_group = parsed_groups[code];
+                            result = result.filter(course => exclude_group.indexOf(course) === -1)
                         }
                         else{
                             result = result.filter(course => course !== code);
                         }
                     });
                 }
-                result = result.filter((course, pos) => result.indexOf(course) == pos); // remove duplicates
+                result = result.filter((course, pos) => result.indexOf(course) === pos); // remove duplicates
                 parsed_groups[key] = result;
             }
-            else if(group.constructor == Array){
-                var result = [];
+            else if(group.constructor === Array){
                 group.forEach(code => {
                     if(code.charAt(0) === "#"){
                         result.push.apply(result, parsed_groups[code]);

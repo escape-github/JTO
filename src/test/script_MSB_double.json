@@ -1,0 +1,40 @@
+{
+    "courses":[
+        "courses.json"
+    ],
+    "imports":{
+        "MSB":"script_MSB.json"
+    },
+    "conditions":{
+        "@MSBMajorOpt1": {
+            "candidates": ["#MSB/MSBOpt1"],
+            "number": 0,
+            "credit": 15
+        },
+        "@MSBMajorOpt2": {
+            "candidates": ["#MSB/MSBOpt2"],
+            "number": 0,
+            "credit": 10
+        },
+        "@MSBMajorOpt3": {
+            "candidates": ["#MSB/MSBOpt3"],
+            "number": 0,
+            "credit": 6
+        },
+        "@MSBMajorOpt": {
+            "candidates": ["@MSBMajorOpt1", "@MSBMajorOpt2","@MSBMajorOpt3"],
+            "number": 3,
+            "credit": 0
+        },
+        "@MSBMajorMand": {
+            "candidates": ["#MSB/MSBMand"],
+            "number": 0,
+            "credit": 6
+        },
+        "@MSBMajor": {
+            "candidates": ["@MSBMajorMand", "@MSBOpt/MSBMajorOpt"],
+            "number": 2,
+            "credit": 0
+        }
+    }
+}

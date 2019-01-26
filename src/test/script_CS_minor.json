@@ -1,0 +1,25 @@
+{
+    "courses":[
+        "courses.json"
+    ],
+    "imports":{
+        "CS": "script_CS.json"
+    },
+    "conditions":{
+        "@CSMajorMand": {
+            "candidates": ["@CS/CS204", "@CS/CS311", "#CS/CSMand"],
+            "number": 0,
+            "credit": 15
+        },
+        "@CSMajorTotal": {
+            "candidates": ["@CS/CS204", "@CS/CS311", "#CS/CSMand", "#CS/CSOpt"],
+            "number": 0,
+            "credit": 21
+        },
+        "@CSMajor": {
+            "candidates": ["@CSMajorMand", "@CSMajorTotal"],
+            "number": 2,
+            "credit": 0
+        }
+    }
+}
