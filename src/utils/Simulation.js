@@ -13,10 +13,11 @@
     - requiredCredit: number of credits should be taken
 */
 export class Condition {
-    constructor(subconditions, number, credit){
+    constructor({subconditions, number, credit, max}){
         this.subconditions = subconditions;
         this.requiredNumber = number;
         this.requiredCredit = credit;
+        this.max = max;
     }
 
     /*
@@ -30,6 +31,9 @@ export class Condition {
                 credit = cond.credit;
             }
         });
+        if (max){
+            return Math.min(credit, max);
+        }
         return credit;
     }
 
@@ -224,7 +228,7 @@ export default function parseScript(fscript, taken){
                 }
             });
     
-            parsed_conditions[key] = new Condition(candidates, condition.number, condition.credit);
+            parsed_conditions[key] = new Condition(candidates, condition.number, condition.credit, condition.max);
         });
     }
 

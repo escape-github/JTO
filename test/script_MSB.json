@@ -1,0 +1,48 @@
+{
+    "courses":[
+        "courses.json"
+    ],
+    "groups":{
+        "#MSBMand":{
+            "filter":{
+                "개설학과":"기술경영학부",
+                "과목구분":"전공필수"
+            }
+        },
+        "#MSBOpt1": ["MSB230", "MSB235", "MSB236", "MSB237", "MSB238", "MSB341", "MSB343", "MSB450"],
+        "#MSBOpt2": ["MSB201", "MSB336", "MSB337", "MSB338", "MSB354", "MSB356", "MSB360", "MSB370", "MSB401", "MSB403", "MSB407", "MSB411", "MSB416", "MSB421", "MSB431", "MSB436", "MSB440", "MSB441", "MSB443", "MSB446", "MSB451", "MSB452", "MSB453", "MSB454", "MSB455", "MSB456", "MSB458", "MSB472", "MSB481", "MSB482", "MSB483", "ENP430"],
+        "#MSBOpt3": ["MSB215", "MSB301", "MSB316", "MSB402", "MSB408", "MSB413", "MSB415"]
+    },
+    "conditions":{
+        "@MSBMajorOpt1": {
+            "candidates": ["#MSBOpt1"],
+            "number": 0,
+            "credit": 15
+        },
+        "@MSBMajorOpt2": {
+            "candidates": ["#MSBOpt2"],
+            "number": 0,
+            "credit": 18
+        },
+        "@MSBMajorOpt3": {
+            "candidates": ["#MSBOpt3"],
+            "number": 0,
+            "credit": 6
+        },
+        "@MSBMajorOpt": {
+            "candidates": ["@MSBMajorOpt1", "@MSBMajorOpt2","@MSBMajorOpt3"],
+            "number": 3,
+            "credit": 0
+        },
+        "@MSBMajorMand": {
+            "candidates": ["#MSBMand"],
+            "number": 3,
+            "credit": 0
+        },
+        "@MSBMajor": {
+            "candidates": ["@MSBMajorMand", "@MSBOpt/MSBMajorOpt"],
+            "number": 2,
+            "credit": 0
+        }
+    }
+}

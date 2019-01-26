@@ -5,7 +5,7 @@
     Created by Juan Lee
 */
 
-var parseScript = require("../src/utils/simulation/Script.js");   // import parseScript
+var parseScript = require("../src/utils/Simulation.js");   // import parseScript
 
 var taken = [
     "CS204", "CS206", "CS300", "CS311", "CS320", "CS330", "CS408",
@@ -14,7 +14,7 @@ var taken = [
 var script = parseScript("script.json", taken);
 
 var CSMajorMand = script.conditions["@CSMajorMand"];
-var CSMajorOpt = script.conditions["@CSOpt/CSMajorOpt"];
+var CSMajorOpt = script.conditions["@CSMajorOpt"];
 var CSMajor = script.conditions["@CSMajor"];
 var parsedTaken = script.taken;
 

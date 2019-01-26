@@ -1,0 +1,42 @@
+{
+    "courses":[
+        "courses.json"
+    ],
+    "groups":{
+        "#MASMand" : ["MAS212", "MAS241", "MAS311", "MAS321", "MAS331", "MAS341", "MAS355"],
+        "#MASOpt": {
+            "filter":{
+                "개설학과":"수리과학과",
+                "과목구분":"전공선택"
+            }
+        },
+        "#Other": ["PH212", "PH221", "PH301", 
+            "MAE200", "MAE221", "MAE230", "MAE231",
+            "IE331", "IE341", "IE342",
+            "EE202", "EE204", "PH231", "EE321",
+            "CS206", "CS300"]
+    },
+    "conditions":{
+        "@MASMajorOptOther": {
+            "candidates": ["#Other"],
+            "number": 0,
+            "credit": 0,
+            "max": 9
+        },
+        "@MASMajorOpt": {
+            "candidates": ["#MASOpt","@MASMajorOptOther"],
+            "number": 0,
+            "credit": 42
+        },
+        "@MASMajorMand": {
+            "candidates": ["#MASMand"],
+            "number": 4,
+            "credit": 0
+        },
+        "@MASMajor": {
+            "candidates": ["@MASMajorMand", "@MASOpt/MASMajorOpt"],
+            "number": 2,
+            "credit": 0
+        }
+    }
+}

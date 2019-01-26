@@ -2,9 +2,6 @@
     "courses":[
         "courses.json"
     ],
-    "imports":{
-        "CSOpt": "script_csopt.json"
-    },
     "groups":{
         "#CSMand": {
             "filter":{
@@ -14,7 +11,14 @@
             "exclude":["CS204", "CS311"]
         },
         "#CS204": ["CS204", "MAS260", "MAS275"],
-        "#CS311": ["CS311", "EE312"]
+        "#CS311": ["CS311", "EE312"],
+        "#CSOpt": {
+            "filter":{
+                "개설학과":"전산학부",
+                "과목구분":"전공선택"
+            },
+            "include":[]
+        }
     },
     "conditions":{
         "@CS204": {
@@ -32,8 +36,13 @@
             "number": 7,
             "credit": 0
         },
+        "@CSMajorOpt": {
+            "candidates": ["#CSOpt"],
+            "number": 0,
+            "credit": 21
+        },
         "@CSMajor": {
-            "candidates": ["@CSMajorMand", "@CSOpt/CSMajorOpt"],
+            "candidates": ["@CSMajorMand", "@CSMajorOpt"],
             "number": 2,
             "credit": 0
         }
