@@ -6,9 +6,9 @@
 */
 
 // class Database
-class Database{
+export default class DatabaseClass{
     constructor(endpoint){
-        this.endpoint = endpoint || process.env.REACT_APP_JSON_ENDPOINT;
+        this.endpoint = endpoint;
     }
 
 //---------------------------------------------------------------------------
@@ -17,8 +17,8 @@ class Database{
 
     // getJSON: def -> Promise
     // - return <Promise> of json
-    async getJSON(def, endpoint){
-        var data = await fetch(endpoint ? this.endpoint + endpoint : this.endpoint)
+    async getJSON(def){
+        var data = await fetch(this.endpoint)
         .then(res => res.json())
         .then(json => json.result);
 
@@ -31,8 +31,8 @@ class Database{
 
     // putJSON: json -> Promise
     // - return <Promise> after putting the json
-    putJSON(json, endpoint){
-        return fetch(endpoint ? this.endpoint + endpoint : this.endpoint, {
+    putJSON(json){
+        return fetch(this.endpoint, {
             headers: {
                 'Content-type': 'application/json',
             },
@@ -43,8 +43,8 @@ class Database{
 
     // clearJSON: json -> void
     // - clear jsonstore at ENDPOINT
-    clearJSON(endpoint){
-        this.putJSON(null, endpoint);
+    clearJSON(){
+        this.putJSON(null);
     }
 
 //---------------------------------------------------------------------------
@@ -52,8 +52,9 @@ class Database{
 //---------------------------------------------------------------------------
 
     get(category){
-        return new Database(this.endpoint + "/" + category);
+        return new DatabaseClass(this.endpoint + "/" + category);
     }
 }
 
-export default new Database();
+export var UserDB = new DatabaseClass(process.env.REACT_APP_USER_ENDPOINT);
+export var CourseDB = new DatabaseClass(process.env.REACT_APP_COURSE_ENDPOINT);

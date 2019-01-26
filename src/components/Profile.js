@@ -8,7 +8,7 @@
 import React, { Component, Fragment } from "react"
 import { Image, Card, Input, Button } from 'semantic-ui-react'
 import SignIn from "./SignIn";
-import Database from "../utils/Database";
+import { UserDB } from "../utils/Database";
 
 /* class Profile */
 export default class Profile extends Component {
@@ -34,10 +34,9 @@ export default class Profile extends Component {
 
         this._onFinishedLogin = this._onFinishedLogin.bind(this);
 
-        var json = localStorage.getItem("auth");
+        var json = JSON.parse(localStorage.getItem("auth"));
         if(json){
-            var authInfo = JSON.parse(json);
-            Database.get("users").get(authInfo.username).getJSON({profile:{}, taken:[]})
+            UserDB.get(json.username).getJSON({profile:{}, taken:[]})
             .then(user => {
                 this.setState({
                     user,
@@ -51,23 +50,30 @@ export default class Profile extends Component {
     _onNameClicked = ()=>{this.setState({editProfileName: true})};
     _onNameEntered = (e)=>{
         if(e.key === 'Enter'){
-            Database.get("users").get(this.state.user.profile.username).get("profile").get("updatedAt").putJSON(new Date());
-            Database.get("users").get(this.state.user.profile.username).get("profile").get("name").putJSON(this.name)
-            .then(() => {
-                var updated = {
-                    ...this.state.user,
-                    profile: {
-                        ...this.state.user.profile,
-                        name: this.name
-                    }
-                };
-
+            if(this.name && this.name.length > 0){
+                UserDB.get(this.state.user.profile.username).get("profile").get("updatedAt").putJSON(new Date());
+                UserDB.get(this.state.user.profile.username).get("profile").get("name").putJSON(this.name)
+                .then(() => {
+                    var updated = {
+                        ...this.state.user,
+                        profile: {
+                            ...this.state.user.profile,
+                            name: this.name
+                        }
+                    };
+    
+                    this.setState({
+                        editProfileName: false,
+                        user: updated
+                    });
+                    this.props._onLoggedIn(updated);
+                })
+            }
+            else {
                 this.setState({
                     editProfileName: false,
-                    user: updated
-                });
-                this.props._onLoggedIn(updated);
-            })
+                })
+            }
         }
     }
 
@@ -81,23 +87,30 @@ export default class Profile extends Component {
     _onStatusClicked = ()=>{this.setState({editProfileStatus: true})};
     _onStatusEntered = (e)=>{
         if(e.key === 'Enter'){
-            Database.get("users").get(this.state.user.profile.username).get("profile").get("updatedAt").putJSON(new Date());
-            Database.get("users").get(this.state.user.profile.username).get("profile").get("status").putJSON(this.status)
-            .then(() => {
-                var updated = {
-                    ...this.state.user,
-                    profile: {
-                        ...this.state.user.profile,
-                        status: this.status
-                    }
-                };
-
+            if(this.status && this.status.length > 0){
+                UserDB.get(this.state.user.profile.username).get("profile").get("updatedAt").putJSON(new Date());
+                UserDB.get(this.state.user.profile.username).get("profile").get("status").putJSON(this.status)
+                .then(() => {
+                    var updated = {
+                        ...this.state.user,
+                        profile: {
+                            ...this.state.user.profile,
+                            status: this.status
+                        }
+                    };
+    
+                    this.setState({
+                        editProfileStatus: false,
+                        user: updated,
+                    });
+                    this.props._onLoggedIn(updated);
+                })
+            }
+            else{
                 this.setState({
-                    editProfileStatus: false,
-                    user: updated,
-                });
-                this.props._onLoggedIn(updated);
-            })
+                    editProfileStatus: false
+                })
+            }
         }
     }
 
