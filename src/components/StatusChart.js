@@ -3,32 +3,34 @@ import ReactHighcharts from 'react-highcharts'
 
 const config = {
     chart: {
-        type: 'column'
+        type: 'column',
+        height: "25%"
     },
     title: {
-        text: 'Title'
+        text: '.'
     },
     xAxis: {
-        categories: ['1/Spring', '1/Fall', '2/Spring', '2/Fall', '3/Spring']
+        categories: ['1/Spring', '1/Fall',  '2/Spring',  '2/Fall', 'Seasonal'],
+        gridLineWidth: 0
     },
     yAxis: {
         min: 0,
         title: {
-            text: 'credits'
+            text: ''
         },
         stackLabels: {
             enabled: true,
             style: {
                 fontWeight: 'bold',
-                color: 'gray'
+                color: 'black'
             }
-        }
+        },
+        labels : "",
+        gridLineWidth: 0
     },
     legend: {
-        align: 'right',
-        x: -30,
+        align: 'center',
         verticalAlign: 'top',
-        y: 25,
         floating: true,
         backgroundColor:'white',
         borderColor: '#CCC',
@@ -50,13 +52,13 @@ const config = {
     },
     series: [{
         name: 'Major',
-        data: [5, 3, 4, 7, 2]
+        data: [0, 3, 9, 10, 0]
     }, {
         name: 'General',
-        data: [2, 2, 3, 2, 1]
+        data: [3,3,1,1, 0]
     }, {
         name: 'Basic',
-        data: [3, 4, 4, 2, 5]
+        data: [17, 12,3,3, 0]
     }]
 };
 
