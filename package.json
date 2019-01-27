@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "react": "^16.7.0",
+    "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.7.0",
     "react-highcharts": "^16.0.2",
     "react-router-dom": "^4.3.1",

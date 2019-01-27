@@ -33,7 +33,7 @@ class Home extends Component {
       <Fragment>
         <Header user={this.state.loggedIn} />
         <Grid centered container columns="equal" style={{minWidth: "1200px", marginTop: 20}}>
-          <Grid.Column width={3}>
+          <Grid.Column width={4}>
             <Grid.Row>
                 <Profile _onLoggedIn = {this._onLoggedIn} />
             </Grid.Row>
