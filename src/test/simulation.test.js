@@ -14,12 +14,12 @@ var taken = [
     "MAS272", "MAS370", "MAS430", "MAS441", "MAS442", "MAS456", "MAS476", "MAS477", "MAS480",
     "EE202",
     "MSB230", "MSB235", "MSB236", "MSB237", "MSB238", "MSB341",
-    "MSB201", "MSB336", "MSB337", "MSB338", "MSB354", "MSB356", "MSB360",
+    "MSB201", "MSB337", "MSB338", "MSB354", "MSB370", "MSB401",
     "MSB215", "MSB301", "MSB316",
     "MSB200", "MSB204", "MSB351",
 ];
 
-var track = {major: "MSB", minor: "CS", doubleMajor: "MAS", advanced: null, individual: null};
+var track = {major: "MAS", minor: "MAS", doubleMajor: "MAS", advanced: null, individual: null};
 var user = new User(taken, track);
 
 console.log(user.checkMajor());
