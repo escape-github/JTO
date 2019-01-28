@@ -125,18 +125,24 @@ class SideCourseList extends Component {
         this.setState({grade});
     }
 
+    _onHover(course){
+        if(this.props._onCourseHover){
+            this.props._onCourseHover(course);
+        }
+    }
+
     render() {
-        var scrollbar_style = this.state.searchPad ? {width: "100%", height: "100%", minHeight: window.innerHeight - 430} : {width: "100%", height: "100%", minHeight: window.innerHeight - 120};
+        var scrollbar_style = this.state.searchPad ? {width: "100%", height: "100%", minHeight: window.innerHeight - 426} : {width: "100%", height: "100%", minHeight: window.innerHeight - 120};
         var search_text = this.state.searchPad ? "Hide" : "Search";
         var courses = this._onUpdateList();
 
         return (
             <Segment style={{background: "#F8F9FA"}} raised>
                 <Scrollbars autoHide style={scrollbar_style}>
-                    <List divided animated verticalAlign="middle">
+                    <List selection animated verticalAlign="middle">
                         {
                             courses.map((course, i) => (
-                                <List.Item key={i}>
+                                <List.Item key={i} onMouseEnter={()=>this._onHover(course)}>
                                     <List.Content style={{margin: 10}}>
                                         <List.Header><div style={{color: "black"}}>{course.title}</div></List.Header>
                                         {course.code}, {course.department}, {course.category}, {course.credit}학점
