@@ -126,7 +126,7 @@ class SideCourseList extends Component {
     }
 
     render() {
-        var scrollbar_style = this.state.searchPad ? {width: "100%", height: "100%", minHeight: window.innerHeight - 390} : {width: "100%", height: "100%", minHeight: window.innerHeight - 80};
+        var scrollbar_style = this.state.searchPad ? {width: "100%", height: "100%", minHeight: window.innerHeight - 430} : {width: "100%", height: "100%", minHeight: window.innerHeight - 120};
         var search_text = this.state.searchPad ? "Hide" : "Search";
         var courses = this._onUpdateList();
 
@@ -138,8 +138,8 @@ class SideCourseList extends Component {
                             courses.map((course, i) => (
                                 <List.Item key={i}>
                                     <List.Content style={{margin: 10}}>
-                                        <List.Header>{course.title}</List.Header>
-                                        {course.department}, {course.category}, {course.credit}학점
+                                        <List.Header><div style={{color: "black"}}>{course.title}</div></List.Header>
+                                        {course.code}, {course.department}, {course.category}, {course.credit}학점
                                     </List.Content>                                
                                 </List.Item>
                             ))

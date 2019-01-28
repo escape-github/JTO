@@ -3,15 +3,20 @@
   - Header, Profile, Overview, Status
 */
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import SideCourseList from '../components/SideCourseList';
+
+import Header from '../components/Header';
 
 class JuanDev extends Component {
     render() {
         return (
-            <div style={{width: "400px"}}>
-                <SideCourseList />
-            </div>
+            <Fragment>
+                <Header />
+                <div style={{width: "400px", marginTop: 40}}>
+                    <SideCourseList />
+                </div>
+            </Fragment>
         );
     }
 }

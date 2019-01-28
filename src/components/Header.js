@@ -18,7 +18,7 @@ export default class Header extends Component {
 
     render(){
         return (
-            <Menu borderless fixed="top" size="massive" style={{background: "#f1f2f6"}}>
+            <Menu inverted borderless fixed="top" size="massive">
                 <Menu.Item>
                     <Icon name="chart pie" /> JTO
                 </Menu.Item>
