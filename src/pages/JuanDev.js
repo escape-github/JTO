@@ -4,15 +4,19 @@
 */
 
 import React, { Component, Fragment } from 'react';
-import { Grid, Message } from 'semantic-ui-react';
+import { Grid, Segment, Header } from 'semantic-ui-react';
 
 import SideCourseList from '../components/SideCourseList';
-import Header from '../components/Header';
+import TopBanner from '../components/Header';
 
 class JuanDev extends Component {
     state = {
         hover: {
             title: "과목명",
+            code: "",
+            department: "",
+            category: "",
+            credit: ""
         }
     }
 
@@ -34,20 +38,25 @@ class JuanDev extends Component {
 
     render() {
         return (
-            <Fragment style={{overflow: 'hidden'}}>
-                <Header _onLoggedIn={this._onLoggedIn.bind(this)} />
+            <Fragment>
+                <TopBanner _onLoggedIn={this._onLoggedIn.bind(this)} />
                 <Grid>
                     <Grid.Column width={4}>
                         <SideCourseList _onCourseSelected={this._onCourseSelected.bind(this)} _onCourseHover={this._onCourseHover.bind(this)} />
                     </Grid.Column>
 
                     <Grid.Column width={11} style={{marginTop: 40}}>
-                        <Message>
-                            <Message.Content>
-                                <Message.Header>{this.state.hover.title}</Message.Header>
-                                {this.state.hover.code}, {this.state.hover.department}, {this.state.hover.category}, {this.state.hover.credit}학점
-                            </Message.Content>
-                        </Message>
+                        <Segment.Group>
+                            <Segment>
+                                <Header>
+                                    {this.state.hover.title}
+                                    <Header.Subheader>{this.state.hover.code}, {this.state.hover.department}, {this.state.hover.category}, {this.state.hover.credit}학점</Header.Subheader>
+                                </Header>
+                            </Segment>
+                            <Segment>Review 1</Segment>
+                            <Segment>Review 2</Segment>
+                            <Segment>Review 3</Segment>
+                        </Segment.Group>
                     </Grid.Column>
                 </Grid>
             </Fragment>
