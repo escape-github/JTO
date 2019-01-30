@@ -1,0 +1,35 @@
+{
+    "courses":{
+        "courses_2018_Fall.json": "2018_Fall",
+        "courses_2019_Spring.json": "2019_Spring"
+    },
+    "imports":{
+        "EE": "script_EE.json"
+    },
+    "groups":{
+        "#EEMandOther": {
+            "filter":{
+                "개설학과":"전기및전자공학부",
+                "과목구분":"전공필수"
+            },
+            "exclude":["EE305"]
+        }
+    },
+    "conditions":{
+        "@EE305":{
+            "candidates": ["EE305"],
+            "number": 1,
+            "credit": 0
+        },
+        "@EEMajorOther": {
+            "candidates": ["#EEMandOther"],
+            "number": 0,
+            "credit": 15
+        },
+        "@EEMajor": {
+            "candidates": ["@EE305","@EEMajorOther"],
+            "number": 2,
+            "credit": 0
+        }
+    }
+}

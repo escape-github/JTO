@@ -31,6 +31,7 @@ export class User {
 		var script = parseScript(`script_${this.major}.json`, this.taken);
 
 		var Major = script.conditions[`@${this.major}Major`];
+		console.log(Major);
 		var parsedTaken = script.taken;
 
 		return Major.check(parsedTaken);

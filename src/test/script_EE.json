@@ -1,0 +1,38 @@
+{
+    "courses":{
+        "courses_2018_Fall.json": "2018_Fall",
+        "courses_2019_Spring.json": "2019_Spring"
+    },
+    "groups":{
+        "#EEMand":{
+            "filter":{
+                "개설학과":"전기및전자공학부",
+                "과목구분":"전공필수"
+            },
+            "exclude": ["EE210", "EE211"]
+        },
+        "#EEOpt":{
+            "filter":{
+                "개설학과":"전기및전자공학부",
+                "과목구분":"전공선택"
+            }
+        }
+    },
+    "conditions":{
+        "@EEMajorOpt": {
+            "candidates": ["#EEOpt"],
+            "number": 0,
+            "credit": 32
+        },
+        "@EEMajorMand": {
+            "candidates": ["#EEMand"],
+            "number": 0,
+            "credit": 18
+        },
+        "@EEMajor": {
+            "candidates": ["@EEMajorMand", "@EEMajorOpt"],
+            "number": 2,
+            "credit": 0
+        }
+    }
+}

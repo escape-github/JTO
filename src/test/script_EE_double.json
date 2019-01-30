@@ -1,0 +1,26 @@
+{
+    "courses":{
+        "courses_2018_Fall.json": "2018_Fall",
+        "courses_2019_Spring.json": "2019_Spring"
+    },
+    "imports":{
+        "EE": "script_EE.json"
+    },
+    "conditions":{
+        "@EEMajorOpt": {
+            "candidates": ["#EE/EEOpt"],
+            "number": 0,
+            "credit": 22
+        },
+        "@EEMajorMand": {
+            "candidates": ["#EE/EEMand"],
+            "number": 0,
+            "credit": 18
+        },
+        "@EEMajor": {
+            "candidates": ["@EEMajorMand", "@EEMajorOpt"],
+            "number": 2,
+            "credit": 0
+        }
+    }
+}
