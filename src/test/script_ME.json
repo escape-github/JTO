@@ -1,0 +1,43 @@
+{
+    "courses":{
+        "courses_2018_Fall.json": "2018_Fall",
+        "courses_2019_Spring.json": "2019_Spring"
+    },
+    "groups":{
+        "#MEMand":{
+            "filter":{
+                "개설학과":"기계공학과",
+                "과목구분":"전공필수"
+            }
+        },
+        "#MEOpt":{
+            "filter":{
+                "개설학과":"기계공학과",
+                "과목구분":"전공선택"
+            }
+        },
+        "#MEOptOther": ["ME251", "ME360", "ME221", "ME231", "ME211", "ME311", "ME207", "ME370", "ME351"]
+    },
+    "conditions":{
+        "@MEMajorOptOther":{
+            "candidates": ["#MEOptOther"],
+            "number": 5,
+            "credit": 0
+        },
+        "@MEMajorOpt": {
+            "candidates": ["#MEOpt"],
+            "number": 0,
+            "credit": 32
+        },
+        "@MEMajorMand": {
+            "candidates": ["#MEMand"],
+            "number": 0,
+            "credit": 12
+        },
+        "@MEMajor": {
+            "candidates": ["@MEMajorMand", "@MEMajorOpt", "@MEMajorOptOther"],
+            "number": 3,
+            "credit": 0
+        }
+    }
+}

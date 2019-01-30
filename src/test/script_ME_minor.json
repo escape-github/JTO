@@ -1,0 +1,26 @@
+{
+    "courses":{
+        "courses_2018_Fall.json": "2018_Fall",
+        "courses_2019_Spring.json": "2019_Spring"
+    },
+    "imports":{
+        "ME": "script_ME.json"
+    },
+    "conditions":{
+        "@MEMajorMand": {
+            "candidates": ["#ME/MEMand"],
+            "number": 2,
+            "credit": 0
+        },
+        "@MEMajorAll": {
+            "candidates": ["#ME/MEMand", "#ME/MEOpt"],
+            "number": 0,
+            "credit": 21
+        },
+        "@MEMajor": {
+            "candidates": ["@MEMajorMand", "@MEMajorAll"],
+            "number": 2,
+            "credit": 0
+        }
+    }
+}

@@ -17,10 +17,13 @@ var taken = [
     "MSB215", "MSB301", "MSB316",
     "MSB200", "MSB204", "MSB351",
     "EE305", "EE405", "EE201", "EE204", "EE209", "EE202",
-    "EE205", "EE210", "EE211", "EE303", "EE304", "EE312", "EE321", "EE326", "EE342", "EE362", "EE403"
+    "EE205", "EE210", "EE211", "EE303", "EE304", "EE312", "EE321", "EE326", "EE342", "EE362", "EE403",
+    "ME303", "ME340", "ME400", "ME200", //ME Major Mandatory
+    "ME251", "ME360", "ME221", "ME231", "ME211", "ME311", "ME207", "ME370", "ME351", //ME Major 기반과목
+    "ME203", "ME312", "ME341" //ME Major Other
 ];
 
-var track = {major: "EE", minor: "EE", doubleMajor: "EE", advanced: null, individual: null};
+var track = {major: "ME", minor: "ME", doubleMajor: "ME", advanced: null, individual: null};
 var user = new User(taken, track);
 
 console.log(user.checkMajor());
