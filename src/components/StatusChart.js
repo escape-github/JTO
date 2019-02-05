@@ -4,14 +4,12 @@ import ReactHighcharts from 'react-highcharts'
 const config = {
     chart: {
         type: 'column',
-        height: "25%"
-    },
-    title: {
-        text: '.'
+        height: "30%"
     },
     xAxis: {
         categories: ['1/Spring', '1/Fall',  '2/Spring',  '2/Fall', 'Seasonal'],
-        gridLineWidth: 0
+        gridLineWidth: 0,
+        tickLength: 0
     },
     yAxis: {
         min: 0,
@@ -52,13 +50,13 @@ const config = {
     },
     series: [{
         name: 'Major',
-        data: [0, 3, 9, 10, 0]
+        data: [0, 3, 9, 10, 7,0,0,0,0,0]
     }, {
         name: 'General',
-        data: [3,3,1,1, 0]
+        data: [3,3,1,1, 7,0,0,0,0,0]
     }, {
         name: 'Basic',
-        data: [17, 12,3,3, 0]
+        data: [17, 12,3,3, 7,0,0,0,0,0]
     }]
 };
 

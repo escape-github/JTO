@@ -134,7 +134,7 @@ class SideCourseList extends Component {
     render() {
         var scrollbar_style = this.state.searchPad ? {width: "100%", height: "100%", minHeight: window.innerHeight - 426} : {width: "100%", height: "100%", minHeight: window.innerHeight - 120};
         var search_text = this.state.searchPad ? "Hide" : "Search";
-        var courses = this._onUpdateList();
+        var courses = [];
 
         return (
             <Segment style={{background: "#F8F9FA"}} raised>
@@ -166,7 +166,7 @@ class SideCourseList extends Component {
                 </div>
                 {this.state.searchPad ? 
                 <Segment basic onKeyDown={e=>{if(e.keyCode===27){this.setState({searchPad:false})}}}>
-                    <Label color="green">구분</Label>
+                    <Label color="green">구분</Label>
                     {Object.keys(this.category).map((elem, i) => {
                         return this.state.category[elem] ? 
                         (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnCategoryClick(elem)} color='blue' as='a'>{elem}</Label>)

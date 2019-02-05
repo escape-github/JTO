@@ -84,6 +84,10 @@ export default class Header extends Component {
                         <Icon name="chart pie" /> JTO
                     </Menu.Item>
 
+                    <Menu.Item style={{fontSize: 16}}>
+                        시나리오
+                    </Menu.Item>
+
                     <Menu.Item style={{fontSize: 16}} onClick={this._onUserClicked.bind(this)} position='right' name='user'>
                         {this.state.auth ? "안녕하세요, " + this.state.user.profile.name + "님" : "Sign In"}
                     </Menu.Item>
