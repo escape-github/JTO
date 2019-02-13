@@ -134,7 +134,7 @@ class SideCourseList extends Component {
     render() {
         var scrollbar_style = this.state.searchPad ? {width: "100%", height: "100%", minHeight: window.innerHeight - 426} : {width: "100%", height: "100%", minHeight: window.innerHeight - 120};
         var search_text = this.state.searchPad ? "Hide" : "Search";
-        var courses = [];
+        var courses = this._onUpdateList();
 
         return (
             <Segment style={{background: "#F8F9FA"}} raised>

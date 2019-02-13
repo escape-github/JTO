@@ -6,7 +6,7 @@
 
 import React, { Component } from 'react';
 import StatusList from './StatusList';
-import CourseChart from './StatusChart';
+import CourseChart from './StatusChartSemester';
 import { Divider, Segment } from 'semantic-ui-react';
 import SearchCourse from './StatusSearch';
 

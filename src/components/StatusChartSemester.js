@@ -60,7 +60,7 @@ const config = {
     }]
 };
 
-export default class CourseChart extends Component {
+export default class StatusChartSemester extends Component {
     render() {
         return (
             <ReactHighcharts config={config} />
