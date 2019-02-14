@@ -4,7 +4,7 @@
 */
 
 import React, { Component } from 'react';
-import { Segment, List, Icon, Divider, Label, Input, Dropdown } from "semantic-ui-react";
+import { Segment, List, Icon, Divider, Label, Input, Button, Dropdown } from "semantic-ui-react";
 import { CourseDB } from '../utils/Database';
 import { Scrollbars } from "react-custom-scrollbars";
 
@@ -132,27 +132,30 @@ class SideCourseList extends Component {
     }
 
     render() {
-        var scrollbar_style = this.state.searchPad ? {width: "100%", height: "100%", minHeight: window.innerHeight - 426} : {width: "100%", height: "100%", minHeight: window.innerHeight - 120};
         var search_text = this.state.searchPad ? "Hide" : "Search";
         var courses = this._onUpdateList();
 
         return (
-            <Segment style={{background: "#F8F9FA"}} raised>
-                <Scrollbars autoHide style={scrollbar_style}>
-                    <List selection animated verticalAlign="middle">
-                        {
-                            courses.map((course, i) => (
-                                <List.Item key={i} onMouseEnter={()=>this._onHover(course)}>
-                                    <List.Content style={{margin: 10}}>
-                                        <List.Header><div style={{color: "black"}}>{course.title}</div></List.Header>
-                                        {course.code}, {course.department}, {course.category}, {course.credit}학점
-                                    </List.Content>                                
-                                </List.Item>
-                            ))
-                        }
-                    </List>
-                </Scrollbars>
-                <Divider />
+            <div>
+                <List selection animated verticalAlign="middle" style={{background: "#F8F9FA", width: "100%", margin: 0}}>
+                    {
+                        courses.map((course, i) => (
+                            <List.Item key={i} onMouseEnter={()=>this._onHover(course)}>
+                                <List.Content style={{margin: 10, width: "100%"}}>
+                                    <List.Header><div style={{color: "black"}}>{course.title}</div></List.Header>
+                                    {course.code}, {course.department}, {course.category}, {course.credit}학점
+                                </List.Content>                                
+                            </List.Item>
+                        ))
+                    }
+                </List>
+            </div>
+        );
+    }
+}
+
+/*
+<Divider />
                 
                 <div 
                     onMouseEnter={() => {
@@ -198,9 +201,6 @@ class SideCourseList extends Component {
                     />
                 </Segment>
                 : null}
-            </Segment>
-        );
-    }
-}
+                */
 
 export default SideCourseList;
