@@ -7,7 +7,6 @@ import React, { Component } from 'react';
 import { Segment, Label, Divider, Input, Dropdown, Header } from 'semantic-ui-react';
 
 import "../css/Home.css";
-import { CourseDB } from '../utils/Database';
 
 class CourseFilter extends Component {
     state = {
@@ -31,7 +30,6 @@ class CourseFilter extends Component {
             department: {'전체': true},
             grade: {'전체': true},
         }
-        this.courses = [];
 
         this.category = {'전체':"", '공통':"공통필수", '교필':'교양필수', '기선':'기초선택', '기필':'기초필수', '석박':'선택(석/박사)', '인선':"인문사회선택", '자선':'자유선택', '전선':'전공선택', '전필':'전공필수', '기타':''};
         this.department = {'전체':'', '인문':'인문사회과학부', '건환':'건설및환경공학과', '기경':'기술경영학부', '기계':'기계공학과', '물리':'물리학과', '바공':'바이오및뇌공학과', '산공':'산업및시스템공학과', '산디':'산업디자인학과', '생명':'생명과학과', '수리':'수리과학과', '원양':'원자력및양자공학과', '전자':'전기및전자공학부', '전산':'전산학부', '항공':'항공우주공학과', '화학':'화학과', '생화공':'생명화학공학과', '신소재':'신소재공학과', '기타':''};
@@ -39,43 +37,13 @@ class CourseFilter extends Component {
 
         this.options = [
             { key: 'title', text: '과목명', value: 'title' },
-          ]
-    }
+        ]
 
-    _onLoggedIn(user){
-        this.setState({
-            user
-        });
-    }
-
-    _onCourseSelected(course){
-
-    }
-
-    _onCourseHover(course){
-        this.setState({
-            hover: course
-        });
-    }
-
-    componentWillMount(){
-        CourseDB.getJSON([])
-        .then(courses => {
-            this.courses = courses.data;
-            this.setState({
-                courses: courses.data
-            })
-        });
-    }
-
-    _onSearchClicked(){
-        this.setState({
-            searchPad: !this.state.searchPad
-        })
+        this.props._onFiltered(this.props.courses);
     }
 
     _onUpdateList(){
-        var filtered = this.courses;
+        var filtered = this.props.courses;
         if(!this.state.category['전체']){
             Object.keys(this.category).forEach(key => {
                 if(this.category[key].trim().length > 0 && !this.state.category[key]){
@@ -107,13 +75,14 @@ class CourseFilter extends Component {
             }
         }
         filtered = filtered.filter(course => course.title.includes(this.state.searchText))
-        return filtered;
+        this.props._onFiltered(filtered);
     }
 
     _onSearchChanged(e){
         this.setState({
             searchText: e.target.value
-        })
+        });
+        this._onUpdateList();
     }
 
     _innerOnCategoryClick(elem){
@@ -126,6 +95,7 @@ class CourseFilter extends Component {
             category['전체'] = false;
         }
         this.setState({category});
+        this._onUpdateList();
     }
 
     _innerOnDepartmentClick(elem){
@@ -138,6 +108,7 @@ class CourseFilter extends Component {
             department['전체'] = false;
         }
         this.setState({department});
+        this._onUpdateList();
     }
 
     _innerOnGradeClick(elem){
@@ -150,12 +121,7 @@ class CourseFilter extends Component {
             grade['전체'] = false;
         }
         this.setState({grade});
-    }
-
-    _onHover(course){
-        if(this.props._onCourseHover){
-            this.props._onCourseHover(course);
-        }
+        this._onUpdateList();
     }
 
     render() {

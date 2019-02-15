@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch, BrowserRouter } from "react-router-dom";
 
 // pages
-import Home from "./pages/_Home";
+import Home from "./pages/Home";
 import About from './pages/About';
 import Edit from "./pages/Edit";
 
