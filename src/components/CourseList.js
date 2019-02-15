@@ -3,29 +3,11 @@
   - Header, Profile, Overview, Status
 */
 
-import React, { Component, Fragment } from 'react';
-import { Grid, Segment, Button, Label, Divider, Input, Dropdown } from 'semantic-ui-react';
-
-import SideCourseList from '../components/SideCourseList';
-import TopBanner from '../components/Header';
-import StatusChartSemester from "../components/StatusChartSemester";
-import StatusChartCategory from '../components/StatusChartCategory';
-import JuanSide from '../components/JuanSide';
-
-import "./JuanDevCss.css";
+import React, { Component } from 'react';
+import { List  } from "semantic-ui-react";
 import { CourseDB } from '../utils/Database';
 
-class JuanDev extends Component {
-    state = {
-        hover: {
-            title: "과목명",
-            code: "",
-            department: "",
-            category: "",
-            credit: ""
-        }
-    }
-
+class SideCourseList extends Component {
     constructor(props){
         super(props);
 
@@ -48,23 +30,7 @@ class JuanDev extends Component {
           ]
     }
 
-    _onLoggedIn(user){
-        this.setState({
-            user
-        });
-    }
-
-    _onCourseSelected(course){
-
-    }
-
-    _onCourseHover(course){
-        this.setState({
-            hover: course
-        });
-    }
-
-    componentWillMount(){
+     componentWillMount(){
         CourseDB.getJSON([])
         .then(courses => {
             this.courses = courses.data;
@@ -165,17 +131,42 @@ class JuanDev extends Component {
     }
 
     render() {
+        var courses = this._onUpdateList();
+
         return (
             <div>
-                <TopBanner _onLoggedIn={this._onLoggedIn.bind(this)} />
-                <div className="side">
-                    <SideCourseList _onCourseSelected={this._onCourseSelected.bind(this)}/> 
-                    <div className="searchButton">
-                        <Button toggle circular icon='search' active={this.state.active} onClick={()=>{this.setState({active: !this.state.active})}}/>
-                    </div>
+                <List selection animated verticalAlign="middle" style={{background: "#F8F9FA", width: "100%", margin: 0}}>
+                    {
+                        courses.map((course, i) => (
+                            <List.Item key={i} onMouseEnter={()=>this._onHover(course)}>
+                                <List.Content style={{margin: 10, width: "100%"}}>
+                                    <List.Header><div style={{color: "black"}}>{course.title}</div></List.Header>
+                                    {course.code}, {course.department}, {course.category}, {course.credit}학점
+                                </List.Content>                                
+                            </List.Item>
+                        ))
+                    }
+                </List>
+            </div>
+        );
+    }
+}
+
+/*
+<Divider />
+                
+                <div 
+                    onMouseEnter={() => {
+                        document.body.style.cursor = "pointer";
+                    }}
+                    onMouseLeave={() => {
+                        document.body.style.cursor = "default";
+                    }}
+                    onClick={this._onSearchClicked.bind(this)}>
+                    <Icon name="search" /> {search_text}
                 </div>
-                {this.state.active ? 
-                <Segment className="searchPad" raised onKeyDown={e=>{if(e.keyCode===27){this.setState({searchPad:false})}}}>
+                {this.state.searchPad ? 
+                <Segment basic onKeyDown={e=>{if(e.keyCode===27){this.setState({searchPad:false})}}}>
                     <Label color="green">구분</Label>
                     {Object.keys(this.category).map((elem, i) => {
                         return this.state.category[elem] ? 
@@ -208,53 +199,6 @@ class JuanDev extends Component {
                     />
                 </Segment>
                 : null}
-                <div className="content">
-                first<br /><br /><br />second<br /><br /><br />text<br /><br /><br />text<br /><br /><br />
-                text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />
-                text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />
-                text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />
-                text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />
-                text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />
-                text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />text<br /><br /><br />
-                text<br /><br /><br />text<br /><br /><br />last2<br /><br /><br />last<br /><br /><br />
-                </div>
-            </div>
-        );
+                */
 
-        return (
-            <Fragment>
-                <TopBanner _onLoggedIn={this._onLoggedIn.bind(this)} />
-                <Grid>
-                    <Grid.Column width={3} style={{paddingRight:0}}>
-                    <SideCourseList _onCourseSelected={this._onCourseSelected.bind(this)}/> 
-                    </Grid.Column>
-
-                    <Grid.Column width={13} style={{marginTop: 40, padding:0}}>
-                        <Grid stretched>
-                            <Grid.Row>
-                                <Grid.Column width={12} style={{paddingRight:0}}>
-                                    <StatusChartSemester />
-                                </Grid.Column>
-                                <Grid.Column width={3}>
-                                    <StatusChartCategory />
-                                </Grid.Column>
-                            </Grid.Row>
-                            <Grid.Row>
-                                <Grid.Column width={12} style={{paddingRight:0}}>
-                                    <Segment />
-                                </Grid.Column>
-                                <Grid.Column width={3}>
-                                    <Segment></Segment>
-                                </Grid.Column>
-                            </Grid.Row>
-                        </Grid>                    
-                    </Grid.Column>
-
-
-                </Grid>
-            </Fragment>
-        );
-    }
-}
-
-export default JuanDev;
+export default SideCourseList;

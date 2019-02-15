@@ -4,11 +4,22 @@
 */
 
 import React, { Component } from 'react';
-import { Segment, List, Icon, Divider, Label, Input, Button, Dropdown } from "semantic-ui-react";
-import { CourseDB } from '../utils/Database';
-import { Scrollbars } from "react-custom-scrollbars";
+import { Segment, Label, Divider, Input, Dropdown, Header } from 'semantic-ui-react';
 
-class SideCourseList extends Component {
+import "../css/Home.css";
+import { CourseDB } from '../utils/Database';
+
+class CourseFilter extends Component {
+    state = {
+        hover: {
+            title: "과목명",
+            code: "",
+            department: "",
+            category: "",
+            credit: ""
+        }
+    }
+ 
     constructor(props){
         super(props);
 
@@ -31,7 +42,23 @@ class SideCourseList extends Component {
           ]
     }
 
-     componentWillMount(){
+    _onLoggedIn(user){
+        this.setState({
+            user
+        });
+    }
+
+    _onCourseSelected(course){
+
+    }
+
+    _onCourseHover(course){
+        this.setState({
+            hover: course
+        });
+    }
+
+    componentWillMount(){
         CourseDB.getJSON([])
         .then(courses => {
             this.courses = courses.data;
@@ -132,75 +159,42 @@ class SideCourseList extends Component {
     }
 
     render() {
-        var search_text = this.state.searchPad ? "Hide" : "Search";
-        var courses = this._onUpdateList();
-
         return (
-            <div>
-                <List selection animated verticalAlign="middle" style={{background: "#F8F9FA", width: "100%", margin: 0}}>
-                    {
-                        courses.map((course, i) => (
-                            <List.Item key={i} onMouseEnter={()=>this._onHover(course)}>
-                                <List.Content style={{margin: 10, width: "100%"}}>
-                                    <List.Header><div style={{color: "black"}}>{course.title}</div></List.Header>
-                                    {course.code}, {course.department}, {course.category}, {course.credit}학점
-                                </List.Content>                                
-                            </List.Item>
-                        ))
-                    }
-                </List>
-            </div>
+            <Segment raised onKeyDown={e=>{if(e.keyCode===27){this.setState({searchPad:false})}}}>
+                <Header>Filter?</Header>
+                <Label color="green">구분</Label>
+                {Object.keys(this.category).map((elem, i) => {
+                    return this.state.category[elem] ? 
+                    (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnCategoryClick(elem)} color='blue' as='a'>{elem}</Label>)
+                    : (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnCategoryClick(elem)} as='a'>{elem}</Label>);
+                })}
+
+                <br/><Label style={{marginTop: 15}} color="green">학과</Label>
+                {Object.keys(this.department).map((elem, i) => {
+                    return (this.state.department[elem] ? 
+                        (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnDepartmentClick(elem)} color='blue' as='a'>{elem}</Label>)
+                        : (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnDepartmentClick(elem)} as='a'>{elem}</Label>));
+                })}
+
+                <br/><Label style={{marginTop: 15}} color="green">학년</Label>
+                {Object.keys(this.grade).map((elem, i) => {
+                    return (this.state.grade[elem] ? 
+                        (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnGradeClick(elem)} color='blue' as='a'>{elem}</Label>)
+                        : (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnGradeClick(elem)} as='a'>{elem}</Label>));
+                })}
+
+                <Divider />
+
+                <Input
+                    action={<Dropdown button basic floating options={this.options} defaultValue='title' />}
+                    style={{marginTop: 15}}
+                    fluid
+                    placeholder="검색"
+                    onChange={this._onSearchChanged.bind(this)}
+                />
+            </Segment>
         );
     }
 }
 
-/*
-<Divider />
-                
-                <div 
-                    onMouseEnter={() => {
-                        document.body.style.cursor = "pointer";
-                    }}
-                    onMouseLeave={() => {
-                        document.body.style.cursor = "default";
-                    }}
-                    onClick={this._onSearchClicked.bind(this)}>
-                    <Icon name="search" /> {search_text}
-                </div>
-                {this.state.searchPad ? 
-                <Segment basic onKeyDown={e=>{if(e.keyCode===27){this.setState({searchPad:false})}}}>
-                    <Label color="green">구분</Label>
-                    {Object.keys(this.category).map((elem, i) => {
-                        return this.state.category[elem] ? 
-                        (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnCategoryClick(elem)} color='blue' as='a'>{elem}</Label>)
-                        : (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnCategoryClick(elem)} as='a'>{elem}</Label>);
-                    })}
-
-                    <br/><Label style={{marginTop: 15}} color="green">학과</Label>
-                    {Object.keys(this.department).map((elem, i) => {
-                        return (this.state.department[elem] ? 
-                            (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnDepartmentClick(elem)} color='blue' as='a'>{elem}</Label>)
-                            : (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnDepartmentClick(elem)} as='a'>{elem}</Label>));
-                    })}
-
-                    <br/><Label style={{marginTop: 15}} color="green">학년</Label>
-                    {Object.keys(this.grade).map((elem, i) => {
-                        return (this.state.grade[elem] ? 
-                            (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnGradeClick(elem)} color='blue' as='a'>{elem}</Label>)
-                            : (<Label key={i} style={{margin: 1}} onClick={()=>this._innerOnGradeClick(elem)} as='a'>{elem}</Label>));
-                    })}
-
-                    <Divider />
-
-                    <Input
-                        action={<Dropdown button basic floating options={this.options} defaultValue='title' />}
-                        style={{marginTop: 15}}
-                        fluid
-                        placeholder="검색"
-                        onChange={this._onSearchChanged.bind(this)}
-                    />
-                </Segment>
-                : null}
-                */
-
-export default SideCourseList;
+export default CourseFilter;
