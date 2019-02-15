@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import { Grid, Segment, Button } from 'semantic-ui-react';
 
 import SideCourseList from '../components/CourseList';
-import TopBanner from '../components/Header';
+import Header from '../components/Header';
 import StatusChartSemester from "../components/StatusChartSemester";
 import StatusChartCategory from '../components/StatusChartCategory';
 import CourseFilter from '../components/CourseFilter';
@@ -34,7 +34,7 @@ class Home extends Component {
         console.log(this.state.filtered)
         return (
             <div>
-                <TopBanner _onLoggedIn={user => this.setState({user})} />
+                <Header _onLoggedIn={user => this.setState({user})} />
                 
                 <div className="side">
                     <SideCourseList filtered={this.state.filtered} _onCourseSelected={selected_course => this.setState({selected_course})}/> 

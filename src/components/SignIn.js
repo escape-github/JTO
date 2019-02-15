@@ -14,9 +14,6 @@ class SignIn extends Component {
 		super(props);
 
 		this._onButtonClicked = this._onButtonClicked.bind(this);
-		this.setState({
-			open: this.props.state
-		});
 	}
 
 	async _signUp(){
@@ -122,7 +119,7 @@ class SignIn extends Component {
 		return (
 			<Modal size="mini" open={this.state.open} style={{padding: 10}} closeOnEscape={true} closeOnDimmerClick={true} onClose={()=>{this.setState({open: false}, this.props._onFinished(null))}}>
 				<Modal.Header>{this.state.signup ? "You need to sign up first!" : "Welcome Back!"}</Modal.Header>
-				<Modal.Content>
+				<Modal.Content style={{margin: 0}}>
 					<Form>
 						<Form.Input onChange = {this._onUsernameChanged.bind(this)} label='Username' placeholder='Username here' />
 						{this.state.username_error ? <Message negative header="Invalid Username" content={this.state.username_error} /> : null}

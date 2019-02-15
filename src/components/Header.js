@@ -39,7 +39,8 @@ export default class Header extends Component {
         localStorage.setItem("auth", null);
         this.setState({
             auth: false,
-            user: null
+            user: null,
+            open: false
         });
     }
 
@@ -78,7 +79,7 @@ export default class Header extends Component {
     render(){
         return (
             <Fragment>
-                {this.state.open ? <SignIn _onFinished={this._onFinishedLogin} /> : null}
+                {this.state.open ? <SignIn _onFinished={this._onFinishedLogin.bind(this)} /> : null}
                 <Menu inverted borderless fixed="top" size="massive">
                     <Menu.Item>
                         <Icon name="chart pie" /> JTO
