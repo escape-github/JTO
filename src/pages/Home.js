@@ -61,7 +61,8 @@ class Home extends Component {
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={12} style={{paddingRight:0}}>
-                                <Segment><AddTaken selected={this.state.selected_course}/></Segment>
+                                <Segment><AddTaken selected={this.state.selected_course} isUploaded = {isUploaded => {this.setState({isUploaded})
+                                console.log(isUploaded)}}/></Segment>
                             </Grid.Column>
                             <Grid.Column width={4}>
                                 <Segment></Segment>

@@ -33,7 +33,7 @@ const config = {
         enabled: false
     },
     series: [{
-        data: [107, 102, 64],
+        data: [107, 102, 64, 12, 12, 12],
         showInLegend: false
     }]
 };

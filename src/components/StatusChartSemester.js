@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import ReactHighcharts from 'react-highcharts'
+import {UserDB} from '../utils/Database'
+
+var credits = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 const config = {
     chart: {
         type: 'column',
         height: "30%"
     },
+    title : {
+        text: " "
+    },
     xAxis: {
-        categories: ['1/Spring', '1/Fall',  '2/Spring',  '2/Fall', 'Seasonal'],
+        categories: ['1/spring', '1/fall',  '2/spring',  '2/fall', '3/spring', '3/fall',  '4/spring',  '4/fall','Seasonal'],
         gridLineWidth: 0,
         tickLength: 0
     },
@@ -49,19 +55,23 @@ const config = {
         }
     },
     series: [{
-        name: 'Major',
-        data: [0, 3, 9, 10, 7,0,0,0,0,0]
-    }, {
-        name: 'General',
-        data: [3,3,1,1, 7,0,0,0,0,0]
-    }, {
-        name: 'Basic',
-        data: [17, 12,3,3, 7,0,0,0,0,0]
+        name: '학점',
+        data: credits
     }]
 };
 
 export default class StatusChartSemester extends Component {
+
     render() {
+        UserDB.get("juan/taken").getJSON([])
+        .then(takens => {
+            var s1 = takens.filter(course => course["semester"] = {"season":"spring","year":1})
+            var c1 = 0
+            s1.forEach(course => {
+                c1 += course["credit"]
+            })
+            credits[0] = c1
+        })
         return (
             <ReactHighcharts config={config} />
         )
