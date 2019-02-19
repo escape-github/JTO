@@ -12,6 +12,7 @@ import StatusChartSemester from "../components/StatusChartSemester";
 import StatusChartCategory from '../components/StatusChartCategory';
 import CourseFilter from '../components/CourseFilter';
 import { CourseDB } from '../utils/Database';
+import AddTaken from '../components/AddTaken'
 
 import "../css/Home.css";
 
@@ -60,7 +61,7 @@ class Home extends Component {
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={12} style={{paddingRight:0}}>
-                                <Segment />
+                                <Segment><AddTaken selected={this.state.selected_course}/></Segment>
                             </Grid.Column>
                             <Grid.Column width={4}>
                                 <Segment></Segment>

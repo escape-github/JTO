@@ -13,6 +13,10 @@ class CourseList extends Component {
         }
     }
 
+    _onCourseSelected(course){
+        this.props._onCourseSelected(course);
+    }
+
     render() {
         var courses = this.props.filtered;
         if(!courses){
@@ -25,7 +29,7 @@ class CourseList extends Component {
             <List selection animated verticalAlign="middle" style={{background: "#F8F9FA", width: "100%", margin: 0}}>
                 {
                     courses.map((course, i) => (
-                        <List.Item key={i} onMouseEnter={()=>this._onHover(course)}>
+                        <List.Item key={i} onMouseEnter={()=>this._onHover(course)} onClick={()=>this._onCourseSelected(course)}>
                             <List.Content style={{margin: 10, width: "100%"}}>
                                 <List.Header><div style={{color: "black"}}>{course.title}</div></List.Header>
                                 {course.code}, {course.department}, {course.category}, {course.credit}학점
